@@ -43,8 +43,9 @@ app.get('/hello', async (req, res) => {
     res.json({
       "result": result.rows
     });
+  } else {
+    res.send('Hello, world!');
   }
-  res.send('Hello, world!');
 });
 
 
