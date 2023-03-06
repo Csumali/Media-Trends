@@ -1,0 +1,209 @@
+\qecho Sample data insertion
+\qecho
+\qecho Adding Genres
+
+INSERT INTO Genre (name)
+VALUES ('Horror');
+
+INSERT INTO Genre (name)
+VALUES ('Action');
+
+INSERT INTO Genre (name)
+VALUES ('Romance');
+
+INSERT INTO Genre (name)
+VALUES ('Comedy');
+
+INSERT INTO Genre (name)
+VALUES ('Sci fi');
+
+INSERT INTO Genre (name)
+VALUES ('Documentary');
+
+\qecho
+\qecho Adding Language
+\qecho
+
+INSERT INTO Language (name)
+VALUES ('English');
+
+INSERT INTO Language (name)
+VALUES ('Mandarin');
+
+INSERT INTO Language (name)
+VALUES ('French');
+
+INSERT INTO Language (name)
+VALUES ('Spanish');
+
+INSERT INTO Language (name)
+VALUES ('Hindi');
+
+INSERT INTO Language (name)
+VALUES ('Japanese');
+
+INSERT INTO Language (name)
+VALUES ('Italian');
+
+\qecho
+\qecho Adding Film Studios
+\qecho
+
+INSERT INTO FilmStudio (name)
+VALUES ('Walt Disney Studios');
+
+INSERT INTO FilmStudio (name)
+VALUES ('Warner Bros');
+
+INSERT INTO FilmStudio (name)
+VALUES ('Universal Pictures');
+
+INSERT INTO FilmStudio (name)
+VALUES ('Sony Pictures');
+
+INSERT INTO FilmStudio (name)
+VALUES ('Paramount Pictures');
+
+\qecho
+\qecho Adding Actors
+\qecho
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Chris', 'Evans');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Michelle', 'Yeoh');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Gal', 'Gadot');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Dwayne', 'Johnson');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Ryan', 'Reynolds');
+
+\qecho
+\qecho Adding Videos and associating actors, genres
+\qecho
+
+\qecho captain america
+INSERT INTO Video (videonum, name, languageid, duration, filmstudioid, releasedate, uploaddate)
+VALUES ('W000000001', 'Captain America: The First Avenger', 1, '2:04:00', 5, '2011-07-19', CURRENT_DATE);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (1, 1);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (1, 2);
+
+\qecho everything everywhere all at once
+INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate)
+VALUES ('W000000002', 'Everything Everywhere All at Once', 2, '2:19:00', '2022-03-11', CURRENT_DATE);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (2, 2);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (2, 2);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (2, 4);
+
+\qecho red notice
+INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate)
+VALUES ('W000000003', 'Red Notice', 1, '1:58:00', '2021-11-04', CURRENT_DATE);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (3, 3);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (3, 4);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (3, 5);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (3, 2);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (3, 4);
+
+\qecho black adam
+INSERT INTO Video (videonum, name, languageid, duration, filmstudioid, releasedate, uploaddate)
+VALUES ('W000000004', 'Black Adam', 1, '2:05:00', 2, '2022-10-21', CURRENT_DATE);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (4, 4);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (4, 2);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (4, 5);
+
+\qecho
+\qecho Adding States
+\qecho
+
+INSERT INTO State(ID, Name)
+VALUES ('CA', 'California');
+
+INSERT INTO State(ID, Name)
+VALUES ('FL', 'Florida');
+
+INSERT INTO State(ID, Name)
+VALUES ('IL', 'Illinois');
+
+INSERT INTO State(ID, Name)
+VALUES ('NY', 'New York');
+
+INSERT INTO State(ID, Name)
+VALUES ('TX', 'Texas');
+
+INSERT INTO State(ID, Name)
+VALUES ('WA', 'Washington');
+
+\qecho
+\qecho Adding Customers
+\qecho
+
+INSERT INTO Customer(Username, Password, Email, PhoneNumber, Address1, City, StateID)
+VALUES ('joyjoy', 'goodjoyce', 'joy@gmail.com', '4251234567', '123 4th AVE NE', 'Kirkland', 'WA');
+
+INSERT INTO Customer(Username, Password, Email, PhoneNumber, Address1, City, StateID)
+VALUES ('vivi', 'goodvivek', 'vivi@gmail.com', '425789012', '456 7th AVE NE', 'Chicago', 'IL');
+
+INSERT INTO Customer(Username, Password, Email, PhoneNumber, Address1, City, StateID)
+VALUES ('floflo', 'goodflora', 'flo@gmail.com', '4253456789', '8901 2nd AVE NE', 'New York City', 'NY');
+
+INSERT INTO Customer(Username, Password, Email, PhoneNumber, Address1, City, StateID)
+VALUES ('chrichri', 'goodchris', 'chris@gmail.com', '4250123456', '34 5th AVE NE', 'Miami', 'FL');
+
+INSERT INTO Customer(Username, Password, Email, PhoneNumber, Address1, City, StateID)
+VALUES ('taltal', 'goodtalon', 'talon@gmail.com', '4257890123', '678 9th AVE NE', 'Austin', 'TX');
+
+\qecho
+\qecho Adding Watch Records
+\qecho
+
+INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
+VALUES (1, 1, CURRENT_DATE);
+
+INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
+VALUES (1, 2, CURRENT_DATE);
+
+INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
+VALUES (1, 4, CURRENT_DATE);
+
+INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
+VALUES (2, 2, CURRENT_DATE);
+
+INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
+VALUES (2, 3, CURRENT_DATE);
+
+INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
+VALUES (3, 2, CURRENT_DATE);
+
+INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
+VALUES (4, 2, CURRENT_DATE);
