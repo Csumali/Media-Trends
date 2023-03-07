@@ -49,16 +49,34 @@ async function getDBConnection(database) {
 
 app.get('/makeNewDB', async (req, res) => {
   try {
-    await createDatabase();
-    await makeTables();
-    await insertData();
-    res.type("text").send("Database successfully created!");
+    let dbExists = await checkDB();
+    if (dbExists) {
+      res.type("text").send("Database alrady exists.");
+    } else {
+      await createDatabase();
+      await makeTables();
+      await insertData();
+      res.type("text").send("Database successfully created!");
+    }
   } catch (error) {
     console.log(error);
     res.status(SERVER_ERROR);
     res.type("text").send(SERVER_ERROR_MSG);
   }
 });
+
+async function checkDB() {
+  let db = await getDBConnection('postgres');
+
+  let query = "SELECT 1 FROM pg_database WHERE datname = 'sample';";
+  let count = await db.query(query);
+  await db.end();
+  if (count.rowCount === 0) {
+    return false;
+  } else {
+    return true;
+  }
+}
 
 async function createDatabase() {
   let db = await getDBConnection('postgres');
