@@ -51,10 +51,6 @@ app.get('/hello', async (req, res) => {
 
 //front-end is in 'public' folder directory
 app.use(express.static('public'));
-
-// Routes
-app.use('/', require('./public/index'))
-
 // Allows us to change the port easily by setting an environment
 const PORT = process.env.PORT || 8000;
 app.listen(PORT);
