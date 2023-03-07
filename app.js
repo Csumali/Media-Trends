@@ -3,6 +3,8 @@
 const express = require('express');
 const app = express();
 
+const fs = require('fs');
+
 // other required modules ...
 const multer = require("multer");
 
@@ -15,11 +17,22 @@ app.use(multer().none()); // requires the "multer" module
 
 const { Pool } = require('pg');
 
-async function getDBConnection() {
+const INVALID_PARAM_ERROR = 400;
+const INVALID_PARAM_ERROR_MSG = "Missing one or more of the required params..";
+const SERVER_ERROR = 500;
+const SERVER_ERROR_MSG = "An error occurred on the server. Try again later.";
+
+const databasePath = "./Sample database.txt";
+const createDatabaseQueries = fs.readFileSync(databasePath, 'utf8');
+
+const dataPath = "./Sample data.txt";
+const InsertDataQueries = fs.readFileSync(dataPath, 'utf8');
+
+async function getDBConnection(database) {
   const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
-    database: 'db07',
+    database: database,
     password: 'qwerty',
     port: '5432',
   });
@@ -29,24 +42,46 @@ async function getDBConnection() {
     console.log('Connected to database');
     return client;
   } catch (error) {
-    console.error('Error connecting to database:', error);
+    console.error(SERVER_ERROR_MSG, error);
     return null;
   }
 }
 
-app.get('/hello', async (req, res) => {
-  let db = await getDBConnection();
-  if (db) {
-    let queryText = "SELECT * FROM Shipper";
-    let result = await db.query(queryText);
-    await db.end();
-    res.json({
-      "result": result.rows
-    });
-  } else {
-    res.send('Hello, world!');
+app.get('/makeNewDB', async (req, res) => {
+  try {
+    await createDatabase();
+    await makeTables();
+    await insertData();
+    res.type("text").send("Database successfully created!");
+  } catch (error) {
+    console.log(error);
+    res.status(SERVER_ERROR);
+    res.type("text").send(SERVER_ERROR_MSG);
   }
 });
+
+async function createDatabase() {
+  let db = await getDBConnection('postgres');
+
+  let query = "CREATE DATABASE sample;";
+  await db.query(query);
+  await db.end();
+  console.log("successfully created database");
+};
+
+async function makeTables() {
+  let db = await getDBConnection('sample');
+  await db.query(createDatabaseQueries);
+  await db.end();
+  console.log("successfully created tables");
+};
+
+async function insertData() {
+  let db = await getDBConnection('sample');
+  await db.query(InsertDataQueries);
+  await db.end();
+  console.log("successfully inserted data");
+};
 
 
 //front-end is in 'public' folder directory
