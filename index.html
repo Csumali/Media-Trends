@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Parse</title>
+</head>
+
+<body>
+    <div class="dropzone">
+        <input type="file" id="csv" accept="file/csv" onchange="parseFile(this)"/>
+         <label for="csv">Choose a CSV file.</label>
+    </div>
+</body>
+<script type="module">
+    import {parse} from './node_modules/@vanillaes/csv/index.js';
+    window.parse = parse;
+</script>
+<script src="parseExample.js"></script>
+</html>
