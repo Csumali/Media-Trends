@@ -1,6 +1,6 @@
-\qecho Sample data insertion
-\qecho
-\qecho Adding Genres
+--- Sample data insertion
+---
+--- Adding Genres
 
 INSERT INTO Genre (name)
 VALUES ('Horror');
@@ -20,9 +20,9 @@ VALUES ('Sci fi');
 INSERT INTO Genre (name)
 VALUES ('Documentary');
 
-\qecho
-\qecho Adding Language
-\qecho
+---
+--- Adding Language
+---
 
 INSERT INTO Language (name)
 VALUES ('English');
@@ -45,9 +45,9 @@ VALUES ('Japanese');
 INSERT INTO Language (name)
 VALUES ('Italian');
 
-\qecho
-\qecho Adding Film Studios
-\qecho
+---
+--- Adding Film Studios
+---
 
 INSERT INTO FilmStudio (name)
 VALUES ('Walt Disney Studios');
@@ -64,9 +64,9 @@ VALUES ('Sony Pictures');
 INSERT INTO FilmStudio (name)
 VALUES ('Paramount Pictures');
 
-\qecho
-\qecho Adding Actors
-\qecho
+---
+--- Adding Actors
+---
 
 INSERT INTO Actor (firstname, lastname)
 VALUES ('Chris', 'Evans');
@@ -83,11 +83,11 @@ VALUES ('Dwayne', 'Johnson');
 INSERT INTO Actor (firstname, lastname)
 VALUES ('Ryan', 'Reynolds');
 
-\qecho
-\qecho Adding Videos and associating actors, genres
-\qecho
+---
+--- Adding Videos and associating actors, genres
+---
 
-\qecho captain america
+--- captain america
 INSERT INTO Video (videonum, name, languageid, duration, filmstudioid, releasedate, uploaddate)
 VALUES ('W000000001', 'Captain America: The First Avenger', 1, '2:04:00', 5, '2011-07-19', CURRENT_DATE);
 
@@ -97,7 +97,7 @@ VALUES (1, 1);
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (1, 2);
 
-\qecho everything everywhere all at once
+--- everything everywhere all at once
 INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate)
 VALUES ('W000000002', 'Everything Everywhere All at Once', 2, '2:19:00', '2022-03-11', CURRENT_DATE);
 
@@ -110,7 +110,7 @@ VALUES (2, 2);
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (2, 4);
 
-\qecho red notice
+--- red notice
 INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate)
 VALUES ('W000000003', 'Red Notice', 1, '1:58:00', '2021-11-04', CURRENT_DATE);
 
@@ -129,7 +129,7 @@ VALUES (3, 2);
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (3, 4);
 
-\qecho black adam
+--- black adam
 INSERT INTO Video (videonum, name, languageid, duration, filmstudioid, releasedate, uploaddate)
 VALUES ('W000000004', 'Black Adam', 1, '2:05:00', 2, '2022-10-21', CURRENT_DATE);
 
@@ -142,9 +142,9 @@ VALUES (4, 2);
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (4, 5);
 
-\qecho
-\qecho Adding States
-\qecho
+---
+--- Adding States
+---
 
 INSERT INTO State(ID, Name)
 VALUES ('CA', 'California');
@@ -164,9 +164,9 @@ VALUES ('TX', 'Texas');
 INSERT INTO State(ID, Name)
 VALUES ('WA', 'Washington');
 
-\qecho
-\qecho Adding Customers
-\qecho
+---
+--- Adding Customers
+---
 
 INSERT INTO Customer(Username, Password, Email, PhoneNumber, Address1, City, StateID)
 VALUES ('joyjoy', 'goodjoyce', 'joy@gmail.com', '4251234567', '123 4th AVE NE', 'Kirkland', 'WA');
@@ -183,9 +183,9 @@ VALUES ('chrichri', 'goodchris', 'chris@gmail.com', '4250123456', '34 5th AVE NE
 INSERT INTO Customer(Username, Password, Email, PhoneNumber, Address1, City, StateID)
 VALUES ('taltal', 'goodtalon', 'talon@gmail.com', '4257890123', '678 9th AVE NE', 'Austin', 'TX');
 
-\qecho
-\qecho Adding Watch Records
-\qecho
+---
+--- Adding Watch Records
+---
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
 VALUES (1, 1, CURRENT_DATE);
