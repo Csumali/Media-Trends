@@ -65,6 +65,54 @@ app.get('/makeNewDB', async (req, res) => {
   }
 });
 
+app.get('/test', async (req, res) => {
+  let db = await getDBConnection('sample');
+  let username = 'joyjoy';
+  let query = "SELECT password FROM customer WHERE username = $1;";
+  let result = await db.query(query, [username]);
+  res.send(result.rows[0]['password']);
+  await db.end();
+});
+
+app.post('/verifyCredentials', async (req, res) => {
+  try {
+    let username = req.body.username;
+    let password = req.body.password;
+    if (username && password) {
+      let isVerified = await validateUser(username, password);
+      if (isVerified) {
+        res.type("text").send("verified");
+      } else {
+        res.type("text").send("failed");
+      }
+    } else {
+      res.status(INVALID_PARAM_ERROR);
+      res.type("text").send(INVALID_PARAM_ERROR_MSG);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(SERVER_ERROR);
+    res.type("text").send(SERVER_ERROR_MSG);
+  }
+});
+
+async function validateUser(username, password) {
+  let db = await getDBConnection('sample');
+
+  let query = "SELECT password FROM Customer WHERE username = $1;";
+  let result = await db.query(query, [username]);
+
+  await db.end();
+
+  if(result.rows.length === 0) return false;
+
+  if (password === result.rows[0]['password']) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 async function checkDB() {
   let db = await getDBConnection('postgres');
 
@@ -105,9 +153,6 @@ async function insertData() {
 
 //front-end is in 'public' folder directory
 app.use(express.static('public'));
-
-// Routes
-app.use('/', require('./public/index'))
 
 // Allows us to change the port easily by setting an environment
 const PORT = process.env.PORT || 8000;
