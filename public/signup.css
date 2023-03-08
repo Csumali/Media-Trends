@@ -1,5 +1,5 @@
-/****************************** login.css **************************************
-/* This file contains the code to style the login html page
+/****************************** signup.css **************************************
+/* This file contains the code to style the signup html page
 /*
 /******************************************************************************/
 body {
@@ -10,7 +10,11 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 20px;
+}
+
+span {
+    color: red;
 }
 
 h1 {
@@ -22,11 +26,12 @@ h1 {
 h3 {
     font-size: 24px;
     text-align: center;
+    margin-bottom: 30px;
 }
 
 form {
     width: 100%;
-    max-width: 400px;
+    max-width: 900px;
     padding: 30px;
     border-radius: 4px;
     background-color: #f2f2f2;
@@ -39,12 +44,13 @@ form {
 
 label {
     display: block;
+    margin-top: 10px;
     margin-bottom: 10px;
     font-weight: bold;
 }
 
 input {
-    width: 100%;
+    width: 50%;
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 4px;
@@ -52,7 +58,7 @@ input {
     background-color: #e6e6e6;
 }
 
-.login-button {
+.signup-button {
     background-color: #4CAF50;
     border: none;
     color: #fff;
@@ -68,15 +74,15 @@ input {
     box-sizing: border-box;
 }
 
-.login-button:hover {
+.signup-button:hover {
     background-color: #006080;
 }
 
-.signup-button {
+.login-button {
     background-color: #008CBA;
     border: none;
     color: #fff;
-    padding: 12px 24px;
+    padding: 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -84,11 +90,11 @@ input {
     margin-top: 10px;
     cursor: pointer;
     border-radius: 4px;
-    width: 100%;
+    width: 15%;
     box-sizing: border-box;
 }
 
-.signup-button:hover {
+.login-button:hover {
     background-color: #006080;
 }
 

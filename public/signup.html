@@ -4,9 +4,60 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='signup.css'>
+    <script src="login.js"></script>
     <title>Media Trends: Sign up</title>
 </head>
 <body>
-    <h1>sign up now!</h1>
+    <div class="container">
+        <h1>Media Trends</h1>
+        <form id="signup-form">
+            <h3>Sign up</h3>
+            <div class="element">
+                <label for="username">Username<span>*</span>:</label>
+                <input type="text" id="username" name="username" placeholder="Enter username" required>
+            </div>
+            <div class="element">
+                <label for="password">Password<span>*</span>:</label>
+                <input type="password" id="password" name="password" placeholder="Enter password" required>
+            </div>
+            <div class="element">
+                <label for="confirm-password">Confirm Password<span>*</span>:</label>
+                <input type="password" id="cpassword" name="cpassword" placeholder="Re-enter password" required>
+            </div>
+            <div class="element">
+                <label for="email">Email<span>*</span>:</label>
+                <input type="email" id="email" name="email" placeholder="Enter email" required>
+            </div>
+            <div class="element">
+                <label for="phoneNumber">Phone Number<span>*</span>:</label>
+                <input type="number" id="pnumber" name="pnumber" placeholder="Enter phone number" required>
+            </div>
+            <div class="element">
+                <label for="Address1">Address line 1<span>*</span>:</label>
+                <input type="text" id="ad1" name="ad1" placeholder="Address line #1" required>
+            </div>
+            <div class="element">
+                <label for="Address2">Address line 2:</label>
+                <input type="text" id="ad2" name="ad2" placeholder="Address line #2">
+            </div>
+            <div class="element">
+                <label for="city">City<span>*</span>:</label>
+                <input type="text" id="city" name="city" placeholder="Enter City" required>
+            </div>
+            <div class="element">
+                <label for="state">State<span>*</span>:</label>
+                <input type="text" id="state" name="text" placeholder="Enter State" required>
+            </div>
+            <div class="element">
+                <label for="postal-code">Postal Code:</label>
+                <input type="number" id="pc" name="pc" placeholder="Enter postal code">
+            </div>
+            <div class="container">
+                <button class="signup-button" id="signup-button">Create Account</button>
+                <a href="login.html" class="login-button">Login</a>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
