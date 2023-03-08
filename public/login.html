@@ -6,19 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='login.css'>
     <script src="login.js"></script>
-    <title>Media Trends</title>
+    <title>Media Trends: Login</title>
 </head>
 <body>
     <div class="container">
         <h1>Media Trends</h1>
-        <form>
+        <form id="login-form">
             <h3>Login</h3>
+            <p id="invalid" class="hidden">Invalid username or password</p>
             <label for="username">Username</label>
-            <input type="text" id="username" name="username" placeholder="Enter username">
+            <input type="text" id="username" name="username" placeholder="Enter username" required>
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter password">
-            <button type="submit" class="login-button">Login</button>
-            <a href="#" class="signup-button">Sign Up</a>
+            <input type="password" id="password" name="password" placeholder="Enter password" required>
+            <button class="login-button" id="login-button">Login</button>
+            <a href="signup.html" class="signup-button">Sign Up</a>
         </form>
     </div>
 </body>

@@ -86,3 +86,15 @@ input {
 .signup-button:hover {
     background-color: #006080;
 }
+
+#invalid {
+    font-size: small;
+    color: red;
+    text-align: center;
+}
+
+.hidden {
+    /* Used to override other display properties,
+     * .hidden should always take highest precedence */
+    display: none !important;
+  }
