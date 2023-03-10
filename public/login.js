@@ -6,20 +6,30 @@
 // -----------------------------------------------------------------------------
 "use strict";
 (function () {
-    const URL = "/verifyCredentials";
+    const BASE_URL = "/mediaTrends/";
     window.addEventListener("load", init);
 
     /**
      * Sets up page on load.
      */
-    function init() {
+    async function init() {
         sessionStorage.setItem('username', '');
+        await loadDB();
         id("login-form").addEventListener("submit", function(e) {
             // Fires when submit event happens on form
             // If we've gotten in here, all HTML5 validation checks have passed
             e.preventDefault(); // prevent default behavior of submit (page refresh)
             submitRequest(); // intended response function
           });
+    }
+
+    async function loadDB() {
+        fetch(BASE_URL + "makeNewDB")
+            .then(statusCheck)
+            .then(res => res.text())
+            .then(console.log)
+            // .then(check)
+            .catch(console.log);
     }
 
     function submitRequest() {
@@ -30,7 +40,7 @@
         param.append("username", user);
         param.append("password", pwd);
 
-        fetch(URL, { method: "POST", body: param })
+        fetch(BASE_URL + "verifyCredentials", { method: "POST", body: param })
             .then(statusCheck)
             .then(res => res.text())
             .then((response) => {
@@ -40,6 +50,7 @@
                 } else {
                     id("username").value = "";
                     id("password").value = "";
+                    sessionStorage.setItem('username', '');
                     id("invalid").classList.remove("hidden");
                 }
              })

@@ -103,7 +103,7 @@ select {
     background-color: #006080;
 }
 
-#invalid {
+#error-msg {
     font-size: small;
     color: red;
     text-align: center;

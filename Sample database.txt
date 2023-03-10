@@ -71,7 +71,7 @@ CREATE TABLE Customer (
     ID            SERIAL not null,
     Username      VARCHAR(10) not null unique,
     Password      VARCHAR(25) not null,
-    Email         VARCHAR(40) not null unique,
+    Email         VARCHAR(40) not null,
     PhoneNumber   VARCHAR(10) not null,
     Address1      VARCHAR(50) not null,
     Address2      VARCHAR(50),
