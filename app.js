@@ -118,13 +118,56 @@ app.post('/mediaTrends/newCustomer', async (req, res) => {
     let state = req.body.state;
     let postalcode = req.body.postal;
 
-    //res.type("text").send(username + " " + password + " " + email + " " + phonenumber + " " + address1 + " " + address2 + " " + city + " " + state + " " + postalcode);
-    if (!address2) address2 = "";
-    if (!postalcode) postalcode = "";
-    //return;
     if (username && password && email && phonenumber && address1 && city && state) {
       let isVerifiedUsername = await isNewUser(username);
       if (isVerifiedUsername) {
+        if (username.length > 10) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, username too long!");
+          return;
+        }
+        if (password.length > 25) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, password too long!");
+          return;
+        }
+        if (email.length > 40) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, email too long!");
+          return;
+        }
+        if (phonenumber.length > 10) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, phone number too long!");
+          return;
+        }
+        if (address1.length > 50) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, address1 too long!");
+          return;
+        }
+        if (address2.length > 50) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, address2 too long!");
+          return;
+        }
+        if (city.length > 20) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, city name too long!");
+          return;
+        }
+        if (state.length > 2) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, stateID too long!");
+          return;
+        }
+        if (postalcode) {
+          if (postalcode.length != 5) {
+            res.status(INVALID_PARAM_ERROR);
+            res.type("text").send("failed, stateID too long!");
+            return;
+          }
+        }
         await insertNewUser(username, password, email, phonenumber, address1, address2, city, state, postalcode);
         res.type("text").send("success");
       } else {
