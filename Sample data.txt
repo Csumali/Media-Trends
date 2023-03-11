@@ -76,6 +76,9 @@ VALUES ('Sony Pictures');
 INSERT INTO FilmStudio (name)
 VALUES ('Paramount Pictures');
 
+INSERT INTO FilmStudio (name)
+VALUES ('20th Century Fox');
+
 ---
 --- Adding Actors
 ---
@@ -115,6 +118,51 @@ VALUES ('Sakura', 'Ando');
 
 INSERT INTO Actor (firstname, lastname)
 VALUES ('Aamir', 'Khan');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Antonio', 'Banderas');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Salma', 'Hayek');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Khary', 'Payton');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Scott', 'Menville');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Hynden', 'Walch');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Mike', 'Myers');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Eddie', 'Murphy');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Kevin', 'James');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Leonardo', 'Dicaprio');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Kate', 'Winslet');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Stephanie', 'Beatriz');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Craig T.', 'Nelson');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Holly', 'Hunter');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Jason', 'Baterman');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Ginnifer', 'Goodwin');
 
 ---
 --- Adding Videos and associating actors, genres
@@ -288,27 +336,276 @@ VALUES (12, 4);
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (12, 10);
 
+--- puss in boots
+INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate, filmstudioid)
+VALUES ('W000000013', 'Puss in Boots: The Last Wish', 1, '1:43:00', '2022-12-21', CURRENT_DATE, 3);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (13, 13);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (13, 14);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (13, 2);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (13, 4);
+
+--- teen titans
+INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate, filmstudioid)
+VALUES ('W000000014', 'Teen Titans Go! To the Movies', 1, '1:24:00', '2018-7-27', CURRENT_DATE, 2);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (14, 15);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (14, 16);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (14, 17);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (14, 2);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (14, 4);
+
+--- shrek
+INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate, filmstudioid)
+VALUES ('W000000015', 'Shrek', 1, '1:30:00', '2001-5-18', CURRENT_DATE, 3);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (15, 18);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (15, 19);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (15, 4);
+
+--- paul blart
+INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate, filmstudioid)
+VALUES ('W000000016', 'Paul Blart: Mall Cop', 1, '1:31:00', '2009-1-15', CURRENT_DATE, 4);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (16, 20);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (16, 4);
+
+--- titanic
+INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate, filmstudioid)
+VALUES ('W000000017', 'Titanic', 1, '3:14:00', '1997-12-19', CURRENT_DATE, 6);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (17, 21);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (17, 22);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (17, 3);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (17, 10);
+
+--- encanto
+INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate, filmstudioid)
+VALUES ('W000000018', 'Encanto', 1, '1:42:00', '2021-11-24', CURRENT_DATE, 1);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (18, 23);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (18, 4);
+
+--- the incredibles
+INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate, filmstudioid)
+VALUES ('W000000019', 'The Incredibles', 1, '1:55:00', '2021-11-5', CURRENT_DATE, 1);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (19, 24);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (19, 25);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (19, 2);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (19, 4);
+
+--- zootopia
+INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate, filmstudioid)
+VALUES ('W000000020', 'Zootopia', 1, '1:49:00', '2016-3-4', CURRENT_DATE, 1);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (20, 26);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (20, 27);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (20, 4);
+
+INSERT INTO VideoToGenre(VideoID, GenreID)
+VALUES (20, 8);
+
+
 ---
 --- Adding States
 ---
 
 INSERT INTO State(ID, Name)
+VALUES ('AL', 'Alabama');
+
+INSERT INTO State(ID, Name)
+VALUES ('AK', 'Alaska');
+
+INSERT INTO State(ID, Name)
+VALUES ('AZ', 'Arizona');
+
+INSERT INTO State(ID, Name)
+VALUES ('AR', 'Arkansas');
+
+INSERT INTO State(ID, Name)
 VALUES ('CA', 'California');
+
+INSERT INTO State(ID, Name)
+VALUES ('CO', 'Colorado');
+
+INSERT INTO State(ID, Name)
+VALUES ('CT', 'Connecticut');
+
+INSERT INTO State(ID, Name)
+VALUES ('DE', 'Delaware');
 
 INSERT INTO State(ID, Name)
 VALUES ('FL', 'Florida');
 
 INSERT INTO State(ID, Name)
+VALUES ('GA', 'Georgia');
+
+INSERT INTO State(ID, Name)
+VALUES ('HI', 'Hawaii');
+
+INSERT INTO State(ID, Name)
+VALUES ('ID', 'Idaho');
+
+INSERT INTO State(ID, Name)
 VALUES ('IL', 'Illinois');
+
+INSERT INTO State(ID, Name)
+VALUES ('IN', 'Indiana');
+
+INSERT INTO State(ID, Name)
+VALUES ('IA', 'Iowa');
+
+INSERT INTO State(ID, Name)
+VALUES ('KS', 'Kansas');
+
+INSERT INTO State(ID, Name)
+VALUES ('KY', 'Kentucky');
+
+INSERT INTO State(ID, Name)
+VALUES ('LA', 'Louisiana');
+
+INSERT INTO State(ID, Name)
+VALUES ('ME', 'Maine');
+
+INSERT INTO State(ID, Name)
+VALUES ('MD', 'Maryland');
+
+INSERT INTO State(ID, Name)
+VALUES ('MA', 'Massachusetts');
+
+INSERT INTO State(ID, Name)
+VALUES ('MI', 'Michigan');
+
+INSERT INTO State(ID, Name)
+VALUES ('MN', 'Minnesota');
+
+INSERT INTO State(ID, Name)
+VALUES ('MS', 'Mississippi');
+
+INSERT INTO State(ID, Name)
+VALUES ('MO', 'Missouri');
+
+INSERT INTO State(ID, Name)
+VALUES ('MT', 'Montana');
+
+INSERT INTO State(ID, Name)
+VALUES ('NE', 'Nebraska');
+
+INSERT INTO State(ID, Name)
+VALUES ('NV', 'Nevada');
+
+INSERT INTO State(ID, Name)
+VALUES ('NH', 'New Hampshire');
+
+INSERT INTO State(ID, Name)
+VALUES ('NJ', 'New Jersey');
+
+INSERT INTO State(ID, Name)
+VALUES ('NM', 'New Mexico');
 
 INSERT INTO State(ID, Name)
 VALUES ('NY', 'New York');
 
 INSERT INTO State(ID, Name)
+VALUES ('NC', 'North Carolina');
+
+INSERT INTO State(ID, Name)
+VALUES ('ND', 'North Dakota');
+
+INSERT INTO State(ID, Name)
+VALUES ('OH', 'Ohio');
+
+INSERT INTO State(ID, Name)
+VALUES ('OK', 'Oklahoma');
+
+INSERT INTO State(ID, Name)
+VALUES ('OR', 'Oregon');
+
+INSERT INTO State(ID, Name)
+VALUES ('PA', 'Pennsylvania');
+
+INSERT INTO State(ID, Name)
+VALUES ('RI', 'Rhode Island');
+
+INSERT INTO State(ID, Name)
+VALUES ('SC', 'South Carolina');
+
+INSERT INTO State(ID, Name)
+VALUES ('SD', 'South Dakota');
+
+INSERT INTO State(ID, Name)
+VALUES ('TN', 'Tennessee');
+
+INSERT INTO State(ID, Name)
 VALUES ('TX', 'Texas');
 
 INSERT INTO State(ID, Name)
+VALUES ('UT', 'Utah');
+
+INSERT INTO State(ID, Name)
+VALUES ('VT', 'Vermont');
+
+INSERT INTO State(ID, Name)
+VALUES ('VA', 'Virginia');
+
+INSERT INTO State(ID, Name)
 VALUES ('WA', 'Washington');
+
+INSERT INTO State(ID, Name)
+VALUES ('WV', 'West Virginia');
+
+INSERT INTO State(ID, Name)
+VALUES ('WI', 'Wisconsin');
+
+INSERT INTO State(ID, Name)
+VALUES ('WY', 'Wyoming');
 
 ---
 --- Adding Customers
@@ -374,3 +671,12 @@ VALUES (5, 10, CURRENT_DATE);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
 VALUES (2, 5, CURRENT_DATE);
+
+INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
+VALUES (5, 13, CURRENT_DATE);
+
+INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
+VALUES (5, 18, CURRENT_DATE);
+
+INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
+VALUES (5, 20, CURRENT_DATE);
