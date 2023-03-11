@@ -9,8 +9,9 @@
     <title>Media Trends: Update User Info</title>
 </head>
 <body>
-    <div class="container">
-        <a href="MediaTrends.html" class="back-button">Back to Main Page</a>
+    <div class="container" id="update-page">
+        <!-- <a href="MediaTrends.html" class="back-button">Back to Main Page</a> -->
+        <button class="back-button" id="back-button">Back to Main Page</button>
 
         <h1>Media Trends</h1>
         <form id="updateinfo-form">
@@ -111,6 +112,12 @@
                 <button class="update-button" id="update-button">Update Account Info</button>
             </div>
         </form>
+    </div>
+    <div class="hidden" id="error-page" >
+        <h1>ERROR: Please sign in to use this feature</h1>
+        <div class="container">
+            <a href="login.html" class="login-button"> Login </a>
+        </div>
     </div>
 </body>
 </html>

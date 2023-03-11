@@ -75,13 +75,47 @@ app.get('/test', async (req, res) => {
 });
 
 app.get('/mediaTrends/getUsernames', async (req, res) => {
-  let db = await getDBConnection('sample');
-  let query = "SELECT username FROM Customer;";
-  let result = await db.query(query);
-  res.json({
-    "result": result.rows
-  });
-  await db.end();
+  try {
+    let db = await getDBConnection('sample');
+    let query = "SELECT username FROM Customer;";
+    let result = await db.query(query);
+    res.json({
+      "result": result.rows
+    });
+    await db.end();
+  } catch (error) {
+    console.log(error);
+    res.status(SERVER_ERROR);
+    res.type("text").send(SERVER_ERROR_MSG);
+  }
+});
+
+app.get('/mediaTrends/getUserInfo/:username', async (req, res) => {
+  try {
+    let username = req.params.username;
+    if (username) {
+      let isNewUsername = await isNewUser(username);
+      if (!isNewUsername) {
+        let db = await getDBConnection('sample');
+        let query = "SELECT * FROM Customer WHERE username = $1;";
+        let result = await db.query(query, [username]);
+        res.json({
+          "result": result.rows
+        });
+        await db.end();
+      } else {
+        res.status(INVALID_PARAM_ERROR);
+      res.type("text").send("User does not exist");
+      }
+    } else {
+      res.status(INVALID_PARAM_ERROR);
+      res.type("text").send(INVALID_PARAM_ERROR_MSG);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(SERVER_ERROR);
+    res.type("text").send(SERVER_ERROR_MSG);
+  }
 });
 
 app.post('/mediaTrends/verifyCredentials', async (req, res) => {
@@ -202,7 +236,8 @@ async function isNewUser(username) {
 
   await db.end();
 
-  return (result.rows.length === 0);
+  if (result.rows.length === 0) return true;
+  return false;
 }
 
 async function validateUser(username, password) {
