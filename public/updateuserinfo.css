@@ -93,7 +93,7 @@ select {
 }
 
 .reset-button {
-    background-color: #c0bd35;
+    background-color: #555555;
     border: none;
     color: #fff;
     padding: 12px 24px;
@@ -110,7 +110,7 @@ select {
 }
 
 .reset-button:hover {
-    background-color: #676c02;
+    background-color: #232323;
 }
 
 .update-button {
