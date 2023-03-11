@@ -293,22 +293,154 @@ VALUES (12, 10);
 ---
 
 INSERT INTO State(ID, Name)
+VALUES ('AL', 'Alabama');
+
+INSERT INTO State(ID, Name)
+VALUES ('AK', 'Alaska');
+
+INSERT INTO State(ID, Name)
+VALUES ('AZ', 'Arizona');
+
+INSERT INTO State(ID, Name)
+VALUES ('AR', 'Arkansas');
+
+INSERT INTO State(ID, Name)
 VALUES ('CA', 'California');
+
+INSERT INTO State(ID, Name)
+VALUES ('CO', 'Colorado');
+
+INSERT INTO State(ID, Name)
+VALUES ('CT', 'Connecticut');
+
+INSERT INTO State(ID, Name)
+VALUES ('DE', 'Delaware');
 
 INSERT INTO State(ID, Name)
 VALUES ('FL', 'Florida');
 
 INSERT INTO State(ID, Name)
+VALUES ('GA', 'Georgia');
+
+INSERT INTO State(ID, Name)
+VALUES ('HI', 'Hawaii');
+
+INSERT INTO State(ID, Name)
+VALUES ('ID', 'Idaho');
+
+INSERT INTO State(ID, Name)
 VALUES ('IL', 'Illinois');
+
+INSERT INTO State(ID, Name)
+VALUES ('IN', 'Indiana');
+
+INSERT INTO State(ID, Name)
+VALUES ('IA', 'Iowa');
+
+INSERT INTO State(ID, Name)
+VALUES ('KS', 'Kansas');
+
+INSERT INTO State(ID, Name)
+VALUES ('KY', 'Kentucky');
+
+INSERT INTO State(ID, Name)
+VALUES ('LA', 'Louisiana');
+
+INSERT INTO State(ID, Name)
+VALUES ('ME', 'Maine');
+
+INSERT INTO State(ID, Name)
+VALUES ('MD', 'Maryland');
+
+INSERT INTO State(ID, Name)
+VALUES ('MA', 'Massachusetts');
+
+INSERT INTO State(ID, Name)
+VALUES ('MI', 'Michigan');
+
+INSERT INTO State(ID, Name)
+VALUES ('MN', 'Minnesota');
+
+INSERT INTO State(ID, Name)
+VALUES ('MS', 'Mississippi');
+
+INSERT INTO State(ID, Name)
+VALUES ('MO', 'Missouri');
+
+INSERT INTO State(ID, Name)
+VALUES ('MT', 'Montana');
+
+INSERT INTO State(ID, Name)
+VALUES ('NE', 'Nebraska');
+
+INSERT INTO State(ID, Name)
+VALUES ('NV', 'Nevada');
+
+INSERT INTO State(ID, Name)
+VALUES ('NH', 'New Hampshire');
+
+INSERT INTO State(ID, Name)
+VALUES ('NJ', 'New Jersey');
+
+INSERT INTO State(ID, Name)
+VALUES ('NM', 'New Mexico');
 
 INSERT INTO State(ID, Name)
 VALUES ('NY', 'New York');
 
 INSERT INTO State(ID, Name)
+VALUES ('NC', 'North Carolina');
+
+INSERT INTO State(ID, Name)
+VALUES ('ND', 'North Dakota');
+
+INSERT INTO State(ID, Name)
+VALUES ('OH', 'Ohio');
+
+INSERT INTO State(ID, Name)
+VALUES ('OK', 'Oklahoma');
+
+INSERT INTO State(ID, Name)
+VALUES ('OR', 'Oregon');
+
+INSERT INTO State(ID, Name)
+VALUES ('PA', 'Pennsylvania');
+
+INSERT INTO State(ID, Name)
+VALUES ('RI', 'Rhode Island');
+
+INSERT INTO State(ID, Name)
+VALUES ('SC', 'South Carolina');
+
+INSERT INTO State(ID, Name)
+VALUES ('SD', 'South Dakota');
+
+INSERT INTO State(ID, Name)
+VALUES ('TN', 'Tennessee');
+
+INSERT INTO State(ID, Name)
 VALUES ('TX', 'Texas');
 
 INSERT INTO State(ID, Name)
+VALUES ('UT', 'Utah');
+
+INSERT INTO State(ID, Name)
+VALUES ('VT', 'Vermont');
+
+INSERT INTO State(ID, Name)
+VALUES ('VA', 'Virginia');
+
+INSERT INTO State(ID, Name)
 VALUES ('WA', 'Washington');
+
+INSERT INTO State(ID, Name)
+VALUES ('WV', 'West Virginia');
+
+INSERT INTO State(ID, Name)
+VALUES ('WI', 'Wisconsin');
+
+INSERT INTO State(ID, Name)
+VALUES ('WY', 'Wyoming');
 
 ---
 --- Adding Customers
