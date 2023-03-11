@@ -47,7 +47,7 @@ async function getDBConnection(database) {
   }
 }
 
-app.get('/makeNewDB', async (req, res) => {
+app.get('/mediaTrends/makeNewDB', async (req, res) => {
   try {
     let dbExists = await checkDB();
     if (dbExists) {
@@ -74,7 +74,17 @@ app.get('/test', async (req, res) => {
   await db.end();
 });
 
-app.post('/verifyCredentials', async (req, res) => {
+app.get('/mediaTrends/getUsernames', async (req, res) => {
+  let db = await getDBConnection('sample');
+  let query = "SELECT username FROM Customer;";
+  let result = await db.query(query);
+  res.json({
+    "result": result.rows
+  });
+  await db.end();
+});
+
+app.post('/mediaTrends/verifyCredentials', async (req, res) => {
   try {
     let username = req.body.username;
     let password = req.body.password;
@@ -95,6 +105,105 @@ app.post('/verifyCredentials', async (req, res) => {
     res.type("text").send(SERVER_ERROR_MSG);
   }
 });
+
+app.post('/mediaTrends/newCustomer', async (req, res) => {
+  try {
+    let username = req.body.username;
+    let password = req.body.password;
+    let email = req.body.email;
+    let phonenumber = req.body.phone;
+    let address1 = req.body.address1;
+    let address2 = req.body.address2;
+    let city = req.body.city;
+    let state = req.body.state;
+    let postalcode = req.body.postal;
+
+    if (username && password && email && phonenumber && address1 && city && state) {
+      let isVerifiedUsername = await isNewUser(username);
+      if (isVerifiedUsername) {
+        if (username.length > 10) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, username too long!");
+          return;
+        }
+        if (password.length > 25) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, password too long!");
+          return;
+        }
+        if (email.length > 40) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, email too long!");
+          return;
+        }
+        if (phonenumber.length > 10) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, phone number too long!");
+          return;
+        }
+        if (address1.length > 50) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, address1 too long!");
+          return;
+        }
+        if (address2.length > 50) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, address2 too long!");
+          return;
+        }
+        if (city.length > 20) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, city name too long!");
+          return;
+        }
+        if (state.length > 2) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, stateID too long!");
+          return;
+        }
+        if (postalcode) {
+          if (postalcode.length != 5) {
+            res.status(INVALID_PARAM_ERROR);
+            res.type("text").send("failed, stateID too long!");
+            return;
+          }
+        }
+        await insertNewUser(username, password, email, phonenumber, address1, address2, city, state, postalcode);
+        res.type("text").send("success");
+      } else {
+        res.type("text").send("failed, user already exists!");
+      }
+    } else {
+      res.status(INVALID_PARAM_ERROR);
+      res.type("text").send(INVALID_PARAM_ERROR_MSG);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(SERVER_ERROR);
+    res.type("text").send(SERVER_ERROR_MSG);
+  }
+});
+
+async function insertNewUser(username, pwd, email, pnum, ad1, ad2, city, state, pcode) {
+  let db = await getDBConnection('sample');
+
+  let query = "INSERT INTO Customer (username, password, email, phonenumber, address1, address2, city, stateid, postalcode)"
+  + "VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);";
+  let result = await db.query(query, [username, pwd, email, pnum, ad1, ad2, city, state, pcode]);
+
+  await db.end();
+}
+
+async function isNewUser(username) {
+  let db = await getDBConnection('sample');
+
+  let query = "SELECT * FROM Customer WHERE username = $1;";
+  let result = await db.query(query, [username]);
+
+  await db.end();
+
+  return (result.rows.length === 0);
+}
 
 async function validateUser(username, password) {
   let db = await getDBConnection('sample');

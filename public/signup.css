@@ -1,5 +1,5 @@
-/****************************** login.css **************************************
-/* This file contains the code to style the login html page
+/****************************** signup.css **************************************
+/* This file contains the code to style the signup html page
 /*
 /******************************************************************************/
 body {
@@ -10,7 +10,11 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 20px;
+}
+
+span {
+    color: red;
 }
 
 h1 {
@@ -22,11 +26,13 @@ h1 {
 h3 {
     font-size: 24px;
     text-align: center;
+    margin-bottom: 30px;
+    margin-top: 0px;
 }
 
 form {
     width: 100%;
-    max-width: 400px;
+    max-width: 900px;
     padding: 30px;
     border-radius: 4px;
     background-color: #f2f2f2;
@@ -39,12 +45,13 @@ form {
 
 label {
     display: block;
+    margin-top: 10px;
     margin-bottom: 10px;
     font-weight: bold;
 }
 
-input {
-    width: 100%;
+input, select {
+    width: 50%;
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 4px;
@@ -52,28 +59,12 @@ input {
     background-color: #e6e6e6;
 }
 
-.login-button {
-    background-color: #4CAF50;
-    border: none;
-    color: #fff;
-    padding: 12px 24px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-top: 10px;
-    cursor: pointer;
-    border-radius: 4px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.login-button:hover {
-    background-color: #006080;
+select {
+    width: 52.25%;
 }
 
 .signup-button {
-    background-color: #008CBA;
+    background-color: #4CAF50;
     border: none;
     color: #fff;
     padding: 12px 24px;
@@ -92,7 +83,27 @@ input {
     background-color: #006080;
 }
 
-#invalid {
+.login-button {
+    background-color: #008CBA;
+    border: none;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 15%;
+    box-sizing: border-box;
+}
+
+.login-button:hover {
+    background-color: #006080;
+}
+
+#error-msg {
     font-size: small;
     color: red;
     text-align: center;
