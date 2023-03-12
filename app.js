@@ -65,15 +65,6 @@ app.get('/mediaTrends/makeNewDB', async (req, res) => {
   }
 });
 
-app.get('/test', async (req, res) => {
-  let db = await getDBConnection('sample');
-  let username = 'joyjoy';
-  let query = "SELECT password FROM customer WHERE username = $1;";
-  let result = await db.query(query, [username]);
-  res.send(result.rows[0]['password']);
-  await db.end();
-});
-
 app.get('/mediaTrends/getUsernames', async (req, res) => {
   try {
     let db = await getDBConnection('sample');
@@ -308,6 +299,98 @@ app.post('/mediaTrends/updateCustomer', async (req, res) => {
     res.type("text").send(SERVER_ERROR_MSG);
   }
 });
+
+app.post('/mediaTrends/insertWatchRecord', async (req, res) => {
+  try {
+    let username = req.body.username;
+    let videonumber = req.body.videonumber;
+    let date = req.body.date;
+    let time = req.body.time;
+
+    if (username && videonumber && date && time) {
+      username = username.trim();
+      if (username.length === 0) {
+        res.status(INVALID_PARAM_ERROR);
+        res.type("text").send(INVALID_PARAM_ERROR_MSG);
+        return;
+      }
+      let isNotExistingUser = await isNewUser(username);
+      let isValidVideonum = await verifyVideoNum(videonumber);
+      let isValidDate = isValidDateFormat(date);
+      let isValidTime = isValidTimeFormat(time);
+
+      if (isNotExistingUser) {
+        res.status(INVALID_PARAM_ERROR);
+        res.type("text").send("Invalid username. Please enter an existing username");
+        return;
+      }
+      if (!isValidVideonum) {
+        res.status(INVALID_PARAM_ERROR);
+        res.type("text").send("Invalid video number. Please try again");
+        return;
+      }
+      if (!isValidDate) {
+        res.status(INVALID_PARAM_ERROR);
+        res.type("text").send("Invalid date format. Please try again (yyyy-mm-dd)");
+        return;
+      }
+      if (!isValidTime) {
+        res.status(INVALID_PARAM_ERROR);
+        res.type("text").send("Invalid date format. Please try again (hh-mm-ss)");
+        return;
+      }
+
+      let watchtime = date + " " + time;
+
+      await insertWatchRecord(username, videonumber, watchtime);
+      res.type("text").send("success");
+
+    } else {
+      res.status(INVALID_PARAM_ERROR);
+      res.type("text").send(INVALID_PARAM_ERROR_MSG);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(SERVER_ERROR);
+    res.type("text").send(SERVER_ERROR_MSG);
+  }
+});
+
+async function insertWatchRecord(username, videonum, watchtime) {
+  let db = await getDBConnection('sample');
+
+  let query = "INSERT INTO Watchrecord (customerid, videoid, watchtime) " +
+      "VALUES ((SELECT Customer.id FROM Customer WHERE username = $1), " +
+      "(SELECT Video.id FROM Video WHERE videonum = $2), $3);" ;
+
+      let result = await db.query(query, [username, videonum, watchtime]);
+
+  await db.end();
+}
+
+function isValidTimeFormat(timeString) {
+  const timeFormat = /^(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d$/;
+  return timeFormat.test(timeString);
+}
+
+
+function isValidDateFormat(dateString) {
+  const dateFormat = /^\d{4}-\d{2}-\d{2}$/;
+  return dateFormat.test(dateString);
+}
+
+
+async function verifyVideoNum(vidnum) {
+  let db = await getDBConnection('sample');
+
+  let query = "SELECT * FROM Video WHERE videonum = $1;";
+  let result = await db.query(query, [vidnum]);
+
+  await db.end();
+
+  if (result.rows.length !== 0) return true;
+  return false;
+}
 
 async function updateUser(pwd, email, pnum, ad1, ad2, city, state, pcode, username) {
   let db = await getDBConnection('sample');
