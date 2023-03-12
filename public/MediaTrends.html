@@ -9,8 +9,114 @@
     <title>Media Trends</title>
 </head>
 <body>
-    <div id="root"></div>
-    <input type="text">
-    <a href="updateuserinfo.html">update user info</a>
+    <nav class="navbar">
+        <h1 class="logo">Media Trends</h1>
+        <ul class="navbar-menu">
+            <li><a href="#">Sign Out</a></li>
+            <li><a href="#">Update Profile</a></li>
+        </ul>
+    </nav>
+    <section id="recommend-movies-by-favorite">
+        <div class="container">
+            <div class="favorite-container">
+                <h2>Recommend Movies By Favorite:</h2>
+                <form>
+                    <div class="form-element">
+                        <select id="favorite">
+                            <option value="trending">Trending/Popular</option>
+                            <option value="genre">Genre</option>
+                            <option value="language">Language</option>
+                            <option value="studio">Film Studio</option>
+                            <option value="cast">Cast</option>
+                        </select>
+                    </div>
+                    <button type="submit">Recommend Movies</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section id="filter-movies">
+        <div class="container">
+            <div class="filter-options">
+                <h2>Filter Options</h2>
+                <form>
+                    <div class="form-element">
+                        <label for="genre">Genre:</label>
+                        <select id="genre">
+                            <option value="all">All Genres</option>
+                            <option value="action">Action</option>
+                            <option value="comedy">Comedy</option>
+                            <option value="drama">Drama</option>
+                            <option value="horror">Horror</option>
+                            <option value="romance">Romance</option>
+                            <option value="sci-fi">Sci-Fi</option>
+                            <option value="thriller">Thriller</option>
+                        </select>
+                    </div>
+                    <div class="form-element">
+                        <label for="language">Language:</label>
+                        <select id="language">
+                            <option value="all">All Languages</option>
+                            <option value="english">English</option>
+                            <option value="spanish">Spanish</option>
+                            <option value="french">French</option>
+                            <option value="german">German</option>
+                            <option value="mandarin">Mandarin</option>
+                            <option value="japanese">Japanese</option>
+                            <option value="korean">Korean</option>
+                        </select>
+                    </div>
+                    <div class="form-element">
+                        <label for="studio">Film Studio:</label>
+                        <select id="studio">
+                            <option value="all">All Studios</option>
+                            <option value="disney">Disney</option>
+                            <option value="paramount">Paramount</option>
+                            <option value="universal">Universal</option>
+                            <option value="warner-bros">Warner Bros.</option>
+                            <option value="sony">Sony</option>
+                            <option value="20th-century">20th Century</option>
+                            <option value="dreamworks">DreamWorks</option>
+                            <option value="pixar">Pixar</option>
+                        </select>
+                    </div>
+                    <div class="form-element">
+                        <label for="cast">Cast:</label>
+                        <input type="text" id="cast" name="cast" placeholder="Enter cast name">
+                    </div>
+                    <button type="submit">Apply Filters</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section id="trending-movies">
+        <div class="container">
+            <h2>Top 10 Trending Movies</h2>
+            <ul>
+                <li>
+                    <div class="movie-card">
+                        <div class="movie-details">
+                            <h3>1. The Avengers</h3>
+                            <p><strong>Genre:</strong> Action, Adventure, Sci-Fi</p>
+                            <p><strong>Language:</strong> English</p>
+                            <p><strong>Film Studio:</strong> Marvel Studios</p>
+                            <p><strong>Cast:</strong> Robert Downey Jr., Chris Evans, Scarlett Johansson, Mark Ruffalo, Chris Hemsworth</p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <div class="movie-details">
+                            <h3>2. Black Panther</h3>
+                            <p><strong>Genre:</strong> Action, Adventure, Sci-Fi</p>
+                            <p><strong>Language:</strong> English</p>
+                            <p><strong>Film Studio:</strong> Marvel Studios</p>
+                            <p><strong>Cast:</strong> Chadwick Boseman, Michael B. Jordan, Lupita Nyong'o, Danai Gurira, Martin Freeman</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
 </body>
 </html>
