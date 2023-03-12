@@ -9,17 +9,15 @@
     <title>Media Trends: Update User Info</title>
 </head>
 <body>
-    <div class="container">
-        <a href="MediaTrends.html" class="back-button">Back to Main Page</a>
+    <div class="container" id="update-page">
+        <button class="back-button" id="back-button">Back to Main Page</button>
 
         <h1>Media Trends</h1>
         <form id="updateinfo-form">
-            <div class="container">
-                <button class="reset-button" id="reset-button">Reset to Previously Saved Data</button>
-            </div>
             <h3>Update Account Info</h3>
-            <h2>User: [name]</h2>
+            <h2 id="username">User: [name]</h2>
             <p id="error-msg" class="hidden"></p>
+            <p id="success-msg" class="hidden">Update successful</p>
             <div class="element">
                 <label for="password">New Password<span>*</span></label>
                 <input type="password" id="password" name="password" placeholder="Enter password" required maxlength="25">
@@ -111,6 +109,16 @@
                 <button class="update-button" id="update-button">Update Account Info</button>
             </div>
         </form>
+
+        <div class="container">
+            <button class="reset-button" id="reset-button">Reset to Existing Data</button>
+        </div>
+    </div>
+    <div class="hidden" id="error-page" >
+        <h1>ERROR: Please sign in to use this feature</h1>
+        <div class="container">
+            <a href="login.html" class="login-button"> Login </a>
+        </div>
     </div>
 </body>
 </html>

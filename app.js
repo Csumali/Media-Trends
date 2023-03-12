@@ -75,13 +75,48 @@ app.get('/test', async (req, res) => {
 });
 
 app.get('/mediaTrends/getUsernames', async (req, res) => {
-  let db = await getDBConnection('sample');
-  let query = "SELECT username FROM Customer;";
-  let result = await db.query(query);
-  res.json({
-    "result": result.rows
-  });
-  await db.end();
+  try {
+    let db = await getDBConnection('sample');
+    let query = "SELECT username FROM Customer;";
+    let result = await db.query(query);
+    res.json({
+      "result": result.rows
+    });
+    await db.end();
+  } catch (error) {
+    console.log(error);
+    res.status(SERVER_ERROR);
+    res.type("text").send(SERVER_ERROR_MSG);
+  }
+});
+
+app.get('/mediaTrends/getUserInfo/:username', async (req, res) => {
+  try {
+    let username = req.params.username;
+    if (username) {
+      let isNewUsername = await isNewUser(username);
+      if (!isNewUsername) {
+        let db = await getDBConnection('sample');
+        let query = "SELECT password, email, phonenumber, address1, address2, city, stateid, postalcode "
+         + "FROM Customer WHERE username = $1;";
+        let result = await db.query(query, [username]);
+        res.json({
+          "result": result.rows
+        });
+        await db.end();
+      } else {
+        res.status(INVALID_PARAM_ERROR);
+      res.type("text").send("User does not exist");
+      }
+    } else {
+      res.status(INVALID_PARAM_ERROR);
+      res.type("text").send(INVALID_PARAM_ERROR_MSG);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(SERVER_ERROR);
+    res.type("text").send(SERVER_ERROR_MSG);
+  }
 });
 
 app.post('/mediaTrends/verifyCredentials', async (req, res) => {
@@ -89,6 +124,12 @@ app.post('/mediaTrends/verifyCredentials', async (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
     if (username && password) {
+      username = username.trim();
+      if (username.length === 0) {
+        res.status(INVALID_PARAM_ERROR);
+        res.type("text").send(INVALID_PARAM_ERROR_MSG);
+        return;
+      }
       let isVerified = await validateUser(username, password);
       if (isVerified) {
         res.type("text").send("verified");
@@ -119,6 +160,12 @@ app.post('/mediaTrends/newCustomer', async (req, res) => {
     let postalcode = req.body.postal;
 
     if (username && password && email && phonenumber && address1 && city && state) {
+      username = username.trim();
+      if (username.length === 0) {
+        res.status(INVALID_PARAM_ERROR);
+        res.type("text").send(INVALID_PARAM_ERROR_MSG);
+        return;
+      }
       let isVerifiedUsername = await isNewUser(username);
       if (isVerifiedUsername) {
         if (username.length > 10) {
@@ -136,9 +183,9 @@ app.post('/mediaTrends/newCustomer', async (req, res) => {
           res.type("text").send("failed, email too long!");
           return;
         }
-        if (phonenumber.length > 10) {
+        if (phonenumber.length != 10) {
           res.status(INVALID_PARAM_ERROR);
-          res.type("text").send("failed, phone number too long!");
+          res.type("text").send("failed, incorrect number of digits in phone number!");
           return;
         }
         if (address1.length > 50) {
@@ -156,15 +203,15 @@ app.post('/mediaTrends/newCustomer', async (req, res) => {
           res.type("text").send("failed, city name too long!");
           return;
         }
-        if (state.length > 2) {
+        if (state.length != 2) {
           res.status(INVALID_PARAM_ERROR);
-          res.type("text").send("failed, stateID too long!");
+          res.type("text").send("failed, incorrect number of characters in stateID!");
           return;
         }
         if (postalcode) {
           if (postalcode.length != 5) {
             res.status(INVALID_PARAM_ERROR);
-            res.type("text").send("failed, stateID too long!");
+            res.type("text").send("failed, invalid postal code!");
             return;
           }
         }
@@ -184,6 +231,96 @@ app.post('/mediaTrends/newCustomer', async (req, res) => {
   }
 });
 
+app.post('/mediaTrends/updateCustomer', async (req, res) => {
+  try {
+    let username = req.body.username;
+    let password = req.body.password;
+    let email = req.body.email;
+    let phonenumber = req.body.phone;
+    let address1 = req.body.address1;
+    let address2 = req.body.address2;
+    let city = req.body.city;
+    let state = req.body.state;
+    let postalcode = req.body.postal;
+
+    if (username && password && email && phonenumber && address1 && city && state) {
+      let isNotExistingUser = await isNewUser(username);
+      if (!isNotExistingUser) {
+        if (username.length > 10) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, username too long!");
+          return;
+        }
+        if (password.length > 25) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, password too long!");
+          return;
+        }
+        if (email.length > 40) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, email too long!");
+          return;
+        }
+        if (phonenumber.length != 10) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, incorrect number of digits in phone number!");
+          return;
+        }
+        if (address1.length > 50) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, address1 too long!");
+          return;
+        }
+        if (address2.length > 50) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, address2 too long!");
+          return;
+        }
+        if (city.length > 20) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, city name too long!");
+          return;
+        }
+        if (state.length != 2) {
+          res.status(INVALID_PARAM_ERROR);
+          res.type("text").send("failed, incorrect number of characters in stateID!");
+          return;
+        }
+        if (postalcode) {
+          if (postalcode.length != 5) {
+            res.status(INVALID_PARAM_ERROR);
+            res.type("text").send("failed, invalid postal code!");
+            return;
+          }
+        }
+        await updateUser(password, email, phonenumber, address1, address2, city, state, postalcode, username);
+        res.type("text").send("success");
+      } else {
+        res.type("text").send("failed, user already exists!");
+      }
+    } else {
+      res.status(INVALID_PARAM_ERROR);
+      res.type("text").send(INVALID_PARAM_ERROR_MSG);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(SERVER_ERROR);
+    res.type("text").send(SERVER_ERROR_MSG);
+  }
+});
+
+async function updateUser(pwd, email, pnum, ad1, ad2, city, state, pcode, username) {
+  let db = await getDBConnection('sample');
+
+  let query = "UPDATE Customer " +
+  "SET password = $1, email = $2, phonenumber = $3, address1 = $4," +
+  " address2 = $5, city = $6, stateid = $7, postalcode = $8 " +
+  "WHERE username = $9;";
+  let result = await db.query(query, [pwd, email, pnum, ad1, ad2, city, state, pcode, username]);
+
+  await db.end();
+}
+
 async function insertNewUser(username, pwd, email, pnum, ad1, ad2, city, state, pcode) {
   let db = await getDBConnection('sample');
 
@@ -202,7 +339,8 @@ async function isNewUser(username) {
 
   await db.end();
 
-  return (result.rows.length === 0);
+  if (result.rows.length === 0) return true;
+  return false;
 }
 
 async function validateUser(username, password) {
