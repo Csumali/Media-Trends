@@ -631,52 +631,52 @@ VALUES ('taltal', 'goodtalon', 'talon@gmail.com', '4257890123', '678 9th AVE NE'
 ---
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (1, 1, CURRENT_DATE);
+VALUES (1, 1, '2023-03-01 12:10:45'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (1, 2, CURRENT_DATE);
+VALUES (1, 2, '2023-03-01 14:34:16'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (1, 4, CURRENT_DATE);
+VALUES (1, 4, '2023-03-07 17:00:56'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (2, 2, CURRENT_DATE);
+VALUES (2, 2, '2023-03-01 17:11:04'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (2, 3, CURRENT_DATE);
+VALUES (2, 3, '2023-03-01 18:54:28'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (3, 2, CURRENT_DATE);
+VALUES (3, 2, '2023-03-01 02:50:33'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (4, 2, CURRENT_DATE);
+VALUES (4, 2, '2023-03-01 15:11:51'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (1, 12, CURRENT_DATE);
+VALUES (1, 12, '2023-03-08 06:20:30'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (1, 10, CURRENT_DATE);
+VALUES (1, 10, '2023-03-08 08:14:29'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (3, 5, CURRENT_DATE);
+VALUES (3, 5, '2023-03-08 14:08:32'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (5, 8, CURRENT_DATE);
+VALUES (5, 8, '2023-03-09 12:02:21'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (5, 9, CURRENT_DATE);
+VALUES (5, 9, '2023-03-09 13:38:00'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (5, 10, CURRENT_DATE);
+VALUES (5, 10, '2023-03-09 15:16:17'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (2, 5, CURRENT_DATE);
+VALUES (2, 5, '2023-03-08 12:53:05'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (5, 13, CURRENT_DATE);
+VALUES (5, 13, '2023-03-10 01:06:24'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (5, 18, CURRENT_DATE);
+VALUES (5, 18, '2023-03-10 03:10:58'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (5, 20, CURRENT_DATE);
+VALUES (5, 20, '2023-03-10 05:21:40'::TIMESTAMP);
