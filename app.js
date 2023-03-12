@@ -110,6 +110,78 @@ app.get('/mediaTrends/getUserInfo/:username', async (req, res) => {
   }
 });
 
+app.get('/mediaTrends/getTrending', async (req, res) => {
+  try {
+    let db = await getDBConnection('sample');
+    let query = "SELECT y.videonum, y.name AS title, Language.name AS language, FilmStudio.name AS film_studio, y.views " +
+    "FROM ( " +
+          "SELECT Video.videonum, Video.name, Video.languageID, Video.uploaddate, Video.filmStudioID, x.views " +
+          "FROM (" +
+                "SELECT video.id, video.name, count(*) AS views " +
+                "FROM Video " +
+                "JOIN Watchrecord ON (Watchrecord.videoID = Video.id) " +
+                "GROUP BY Video.id, Video.name " +
+              ") AS x " +
+              "LEFT JOIN Video ON (x.id = video.id) " +
+      ") AS y " +
+        "JOIN Language ON (y.languageID = Language.id) " +
+        "LEFT JOIN FilmStudio ON (y.filmStudioID = FilmStudio.ID) " +
+    "ORDER BY y.views DESC, y.uploaddate DESC " +
+    "LIMIT 10;";
+    let result = await db.query(query);
+    res.json({
+      "result": result.rows
+    });
+    await db.end();
+  } catch (error) {
+    console.log(error);
+    res.status(SERVER_ERROR);
+    res.type("text").send(SERVER_ERROR_MSG);
+  }
+});
+
+app.get('/mediaTrends/getActors/:videonumber', async (req, res) => {
+  try {
+    let videonumber = req.params.videonumber;
+    let db = await getDBConnection('sample');
+    let query = "SELECT firstname, lastname " +
+    "FROM Actor " +
+        "JOIN VideoToActor ON (VideoToActor.actorID = Actor.id) " +
+        "JOIN Video ON (VideoToActor.videoID = Video.id) " +
+    "WHERE Video.videonum = $1;";
+    let result = await db.query(query, [videonumber]);
+    res.json({
+      "result": result.rows
+    });
+    await db.end();
+  } catch (error) {
+    console.log(error);
+    res.status(SERVER_ERROR);
+    res.type("text").send(SERVER_ERROR_MSG);
+  }
+});
+
+app.get('/mediaTrends/getGenres/:videonumber', async (req, res) => {
+  try {
+    let videonumber = req.params.videonumber;
+    let db = await getDBConnection('sample');
+    let query = "SELECT Genre.name " +
+    "FROM Genre " +
+        "JOIN VideoToGenre ON (VideoToGenre.genreID = Genre.id) " +
+        "JOIN Video ON (VideoToGenre.videoID = Video.id) " +
+    "WHERE Video.videonum = $1;";
+    let result = await db.query(query, [videonumber]);
+    res.json({
+      "result": result.rows
+    });
+    await db.end();
+  } catch (error) {
+    console.log(error);
+    res.status(SERVER_ERROR);
+    res.type("text").send(SERVER_ERROR_MSG);
+  }
+});
+
 app.post('/mediaTrends/verifyCredentials', async (req, res) => {
   try {
     let username = req.body.username;
@@ -356,14 +428,35 @@ app.post('/mediaTrends/insertWatchRecord', async (req, res) => {
   }
 });
 
+async function getFavoriteGenre(username) {
+  let db = await getDBConnection('sample');
+
+  let query = "SELECT Genre.name, COUNT(*) AS VideosWatched " +
+  "FROM Customer  " +
+    "JOIN Watchrecord ON ( Watchrecord.customerid = Customer.id) " +
+    "JOIN Video ON ( Video.id = Watchrecord.videoid) " +
+    "JOIN Videotogenre ON ( Video.id = Videotogenre.videoid) " +
+    "JOIN Genre ON ( Videotogenre.genreid = Genre.id) " +
+  "WHERE Customer.username = $1 " +
+  "GROUP BY Genre.ID " +
+  "ORDER BY VideosWatched Desc " +
+  "LIMIT 1;";
+
+  let result = await db.query(query, [username]);
+
+  await db.end();
+
+  return result.rows[0]['name'];
+}
+
 async function insertWatchRecord(username, videonum, watchtime) {
   let db = await getDBConnection('sample');
 
   let query = "INSERT INTO Watchrecord (customerid, videoid, watchtime) " +
       "VALUES ((SELECT Customer.id FROM Customer WHERE username = $1), " +
-      "(SELECT Video.id FROM Video WHERE videonum = $2), $3);" ;
+      "(SELECT Video.id FROM Video WHERE videonum = $2), $3);";
 
-      let result = await db.query(query, [username, videonum, watchtime]);
+  let result = await db.query(query, [username, videonum, watchtime]);
 
   await db.end();
 }

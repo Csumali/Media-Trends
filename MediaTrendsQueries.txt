@@ -1,0 +1,89 @@
+\qecho Customer favorite genre:
+SELECT Genre.name, COUNT(*) AS VideosWatched
+FROM Customer 
+	JOIN Watchrecord ON ( Watchrecord.customerid = Customer.id)
+	JOIN Video ON ( Video.id = Watchrecord.videoid)
+	JOIN Videotogenre ON ( Video.id = Videotogenre.videoid)
+	JOIN Genre ON ( Videotogenre.genreid = Genre.id)
+WHERE Customer.id = <customer_id>
+GROUP BY Genre.ID
+ORDER BY VideosWatched Desc
+LIMIT 1;
+
+\qecho Most Popular/Trending:
+SELECT Video.name, Video.releasedate, Video.uploaddate
+FROM WatchRecord 
+	JOIN Video ON ( Video.id = Watchrecord.videoid)
+GROUP BY Video.id
+ORDER BY Video.uploaddate DESC
+LIMIT 10;
+
+\qecho Customer favorite language:
+SELECT Video.language, COUNT (*) as count
+FROM Customer
+	JOIN Watchrecord ON ( Customer.id = Watchrecord.customerid)
+	JOIN Video ON ( Watchrecord.videoid = Video.id)
+WHERE Customer.id = <customer_id>
+GROUP BY Video.language
+ORDER BY count DESC
+LIMIT 1;
+
+\qecho Customer favorite film studios
+SELECT Filmstudio.name, COUNT (*) as count
+FROM Customer
+	JOIN Watchrecord ON ( Customer.id = Watchrecord.customerid)
+	JOIN Video ON ( Watchrecord.videoid = Video.id)
+	JOIN Filmstudio ON ( Video.filmstudioid = Filmstudio.id)
+WHERE Customer.id = <customer_id>
+GROUP BY Filmstudio.namr
+ORDER BY count DESC
+LIMIT 1;
+
+\qecho Customer favorite cast
+SELECT Actor.firstname, Actor.lastname, COUNT (*) AS count
+FROM Customer
+	JOIN Watchrecord ON ( Customer.id = Watchrecord.customerid)
+	JOIN Video ON ( Watchrecord.videoid = Video.id)
+	JOIN Videotoactor ON ( Videotoactor.videoid = Video.id)
+	JOIN Actor ON ( Actor.id = Videotoactor.Actorid)
+WHERE Customer.id = <customer_id> 
+GROUP BY Actor.id
+ORDER BY count DESC
+LIMIT 1;
+
+\qecho Filter the results by genre, language, release date (new vs old), and duration
+
+\qecho Genre:
+SELECT Video.name, Video.releasedate, Video.language, COUNT (*) AS watch_count
+FROM Video
+	JOIN Videotogenre ON ( Video.id = Videotogenre.videoid)
+	JOIN Genre ON ( Videotogenre.genreid = Genre.id)
+WHERE Genre.name = <genre_name>
+GROUP BY Video.id
+ORDER BY watch_count DESC, Video.releasedate DESC
+LIMIT 10;
+
+\qehco Language:
+SELECT Video.name, Video.releasedate, COUNT (*) AS watch_count
+FROM Video
+	JOIN Language ON ( Video.languageid = Language.id)
+WHERE Language.name = <language>
+GROUP BY Video.id
+ORDER BY watch_count DESC, Video.releasedate DESC
+LIMIT 10;
+
+\qecho Release date (newest videos first)
+SELECT *
+FROM Video
+ORDER BY releasedate DESC;
+
+\qecho Release date (oldest videos first)
+SELECT *
+FROM Video
+ORDER BY releasedate ASC;
+
+\qecho Duration ( for example: videos that have a duratio between 30 and 60 minutes)
+SELECT * 
+FROM Video
+WHERE duration BETWEEN 30 AND 60;
+
