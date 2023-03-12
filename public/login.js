@@ -34,6 +34,13 @@
 
     function submitRequest() {
         let user = id("username").value;
+        user = user.trim();
+        if (user.length === 0) {
+            id("username").value = "";
+            id("password").value = "";
+            id("invalid").classList.remove("hidden");
+            return;
+        }
         let pwd = id("password").value;
 
         let param = new FormData();

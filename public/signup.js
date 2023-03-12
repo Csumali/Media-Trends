@@ -61,6 +61,14 @@
 
     function submitRequest() {
         let user = id("username").value;
+
+        user = user.trim();
+        if (user.length === 0) {
+            clearForm();
+            id("error-msg").textContent = "Invalid username. Please try again.";
+            id("error-msg").classList.remove("hidden");
+            return;
+        }
         if (isUsernameAllowed(user)) {
             let pwd = id("password").value;
             let cpwd = id("cpassword").value;

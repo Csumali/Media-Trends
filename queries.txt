@@ -1,2 +1,6 @@
 INSERT INTO Customer (username, password, email, phonenumber, address1, address2, city, stateid, postalcode)
   VALUES ('user1', 'qwerty', 'user@gmail.com', '2029993333', '1234 street', '', 'seattle', 'WA', '');
+
+UPDATE Customer
+SET password = '$2', email = '$3', phonenumber = '$4', address1 = '$5', address2 = '$6', city = '$7', stateid = '$8', postalcode = '$9'
+WHERE username = '$1';
