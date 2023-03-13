@@ -164,6 +164,39 @@ VALUES ('Jason', 'Baterman');
 INSERT INTO Actor (firstname, lastname)
 VALUES ('Ginnifer', 'Goodwin');
 
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Hayley', 'Atwell');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Stephanie', 'Hsu');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Aldis', 'Hodge');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Chris', 'Pine');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Ana', 'Wagener');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Marina', 'de Tavira');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Mathieu', 'Kassovitz');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Darsheel', 'Safary');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Mona', 'Singh');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Jayma', 'Mays');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Jessica', 'Darrow');
+
 ---
 --- Adding Videos and associating actors, genres
 ---
@@ -175,6 +208,9 @@ VALUES ('W000000001', 'Captain America: The First Avenger', 1, '2:04:00', 5, '20
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (1, 1);
 
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (1, 28);
+
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (1, 2);
 
@@ -184,6 +220,9 @@ VALUES ('W364471921', 'Everything Everywhere All at Once', 2, '2:19:00', '2022-0
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (2, 2);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (2, 29);
 
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (2, 2);
@@ -217,6 +256,9 @@ VALUES ('W746183031', 'Black Adam', 1, '2:05:00', 2, '2022-10-21', '2023-3-5'::D
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (4, 4);
 
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (4, 30);
+
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (4, 2);
 
@@ -230,6 +272,9 @@ VALUES ('W088132870', 'Wonder Woman', 1, '2:21:00', 2, '2017-05-26', '2023-3-6':
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (5, 3);
 
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (5, 31);
+
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (5, 2);
 
@@ -238,10 +283,13 @@ VALUES (5, 5);
 
 --- the invisible guest
 INSERT INTO Video (videonum, name, languageid, duration, filmstudioid, releasedate, uploaddate)
-VALUES ('W000000006', 'The Invisible Guest', 4, '1:46:00', 2, '2016-09-23', '2023-3-6'::DATE);
+VALUES ('W883746286', 'The Invisible Guest', 4, '1:46:00', 2, '2016-09-23', '2023-3-6'::DATE);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (6, 6);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (6, 32);
 
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (6, 7);
@@ -259,6 +307,9 @@ VALUES ('W145381107', 'Roma', 4, '2:15:00', '2018-11-21', '2023-3-7'::DATE);
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (7, 7);
 
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (7, 33);
+
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (7, 10);
 
@@ -268,6 +319,9 @@ VALUES ('W120971527', 'Amélie', 3, '2:03:00', '2001-04-25', '2023-3-8'::DATE);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (8, 8);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (8, 34);
 
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (8, 3);
@@ -317,6 +371,9 @@ VALUES ('W952441680', 'Like Stars on Earth', 5, '2:44:00', '2007-12-21', '2023-3
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (11, 12);
 
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (11, 35);
+
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (11, 10);
 
@@ -326,6 +383,9 @@ VALUES ('W000000012', '3 Idiots', 5, '2:51:00', '2009-12-25', '2023-3-10'::DATE)
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (12, 12);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (12, 36);
 
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (12, 3);
@@ -391,6 +451,9 @@ VALUES ('W681924809', 'Paul Blart: Mall Cop', 1, '1:31:00', '2009-1-15', '2023-3
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (16, 20);
 
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (16, 37);
+
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (16, 4);
 
@@ -416,6 +479,9 @@ VALUES ('W194746005', 'Encanto', 1, '1:42:00', '2021-11-24', '2023-3-10'::DATE, 
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (18, 23);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (18, 38);
 
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (18, 4);
