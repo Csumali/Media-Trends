@@ -164,26 +164,65 @@ VALUES ('Jason', 'Baterman');
 INSERT INTO Actor (firstname, lastname)
 VALUES ('Ginnifer', 'Goodwin');
 
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Hayley', 'Atwell');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Stephanie', 'Hsu');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Aldis', 'Hodge');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Chris', 'Pine');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Ana', 'Wagener');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Marina', 'de Tavira');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Mathieu', 'Kassovitz');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Darsheel', 'Safary');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Mona', 'Singh');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Jayma', 'Mays');
+
+INSERT INTO Actor (firstname, lastname)
+VALUES ('Jessica', 'Darrow');
+
 ---
 --- Adding Videos and associating actors, genres
 ---
 
 --- captain america
 INSERT INTO Video (videonum, name, languageid, duration, filmstudioid, releasedate, uploaddate)
-VALUES ('W000000001', 'Captain America: The First Avenger', 1, '2:04:00', 5, '2011-07-19', CURRENT_DATE);
+VALUES ('W000000001', 'Captain America: The First Avenger', 1, '2:04:00', 5, '2011-07-19', '2023-3-1'::DATE);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (1, 1);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (1, 28);
 
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (1, 2);
 
 --- everything everywhere all at once
 INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate)
-VALUES ('W000000002', 'Everything Everywhere All at Once', 2, '2:19:00', '2022-03-11', CURRENT_DATE);
+VALUES ('W364471921', 'Everything Everywhere All at Once', 2, '2:19:00', '2022-03-11', '2023-3-1'::DATE);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (2, 2);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (2, 29);
 
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (2, 2);
@@ -193,7 +232,7 @@ VALUES (2, 4);
 
 --- red notice
 INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate)
-VALUES ('W000000003', 'Red Notice', 1, '1:58:00', '2021-11-04', CURRENT_DATE);
+VALUES ('W810462700', 'Red Notice', 1, '1:58:00', '2021-11-04', '2023-3-1'::DATE);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (3, 3);
@@ -212,10 +251,13 @@ VALUES (3, 4);
 
 --- black adam
 INSERT INTO Video (videonum, name, languageid, duration, filmstudioid, releasedate, uploaddate)
-VALUES ('W000000004', 'Black Adam', 1, '2:05:00', 2, '2022-10-21', CURRENT_DATE);
+VALUES ('W746183031', 'Black Adam', 1, '2:05:00', 2, '2022-10-21', '2023-3-5'::DATE);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (4, 4);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (4, 30);
 
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (4, 2);
@@ -225,10 +267,13 @@ VALUES (4, 5);
 
 --- wonder women
 INSERT INTO Video (videonum, name, languageid, duration, filmstudioid, releasedate, uploaddate)
-VALUES ('W000000005', 'Wonder Woman', 1, '2:21:00', 2, '2017-05-26', CURRENT_DATE);
+VALUES ('W088132870', 'Wonder Woman', 1, '2:21:00', 2, '2017-05-26', '2023-3-6'::DATE);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (5, 3);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (5, 31);
 
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (5, 2);
@@ -238,10 +283,13 @@ VALUES (5, 5);
 
 --- the invisible guest
 INSERT INTO Video (videonum, name, languageid, duration, filmstudioid, releasedate, uploaddate)
-VALUES ('W000000006', 'The Invisible Guest', 4, '1:46:00', 2, '2016-09-23', CURRENT_DATE);
+VALUES ('W883746286', 'The Invisible Guest', 4, '1:46:00', 2, '2016-09-23', '2023-3-6'::DATE);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (6, 6);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (6, 32);
 
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (6, 7);
@@ -254,20 +302,26 @@ VALUES (6, 9);
 
 --- roma
 INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate)
-VALUES ('W000000007', 'Roma', 4, '2:15:00', '2018-11-21', CURRENT_DATE);
+VALUES ('W145381107', 'Roma', 4, '2:15:00', '2018-11-21', '2023-3-7'::DATE);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (7, 7);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (7, 33);
 
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (7, 10);
 
 --- Amélie
 INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate)
-VALUES ('W000000008', 'Amélie', 3, '2:03:00', '2001-04-25', CURRENT_DATE);
+VALUES ('W120971527', 'Amélie', 3, '2:03:00', '2001-04-25', '2023-3-8'::DATE);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (8, 8);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (8, 34);
 
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (8, 3);
@@ -280,7 +334,7 @@ VALUES (8, 10);
 
 --- Crouching Tiger, Hidden Dragon
 INSERT INTO Video (videonum, name, languageid, duration, filmstudioid, releasedate, uploaddate)
-VALUES ('W000000009', 'Crouching Tiger, Hidden Dragon', 2, '2:00:00', 4, '2000-12-08', CURRENT_DATE);
+VALUES ('W716524008', 'Crouching Tiger, Hidden Dragon', 2, '2:00:00', 4, '2000-12-08', '2023-3-8'::DATE);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (9, 2);
@@ -296,7 +350,7 @@ VALUES (9, 10);
 
 --- Shoplifters
 INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate)
-VALUES ('W000000010', 'Shoplifters', 6, '2:01:00', '2018-06-08', CURRENT_DATE);
+VALUES ('W711917207', 'Shoplifters', 6, '2:01:00', '2018-06-08', '2023-3-8'::DATE);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (10, 10);
@@ -312,20 +366,26 @@ VALUES (10, 10);
 
 --- Like Stars on Earth
 INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate)
-VALUES ('W000000011', 'Like Stars on Earth', 5, '2:44:00', '2007-12-21', CURRENT_DATE);
+VALUES ('W952441680', 'Like Stars on Earth', 5, '2:44:00', '2007-12-21', '2023-3-10'::DATE);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (11, 12);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (11, 35);
 
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (11, 10);
 
 --- 3 Idiots
 INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate)
-VALUES ('W000000012', '3 Idiots', 5, '2:51:00', '2009-12-25', CURRENT_DATE);
+VALUES ('W000000012', '3 Idiots', 5, '2:51:00', '2009-12-25', '2023-3-10'::DATE);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (12, 12);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (12, 36);
 
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (12, 3);
@@ -338,7 +398,7 @@ VALUES (12, 10);
 
 --- puss in boots
 INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate, filmstudioid)
-VALUES ('W000000013', 'Puss in Boots: The Last Wish', 1, '1:43:00', '2022-12-21', CURRENT_DATE, 3);
+VALUES ('W166142983', 'Puss in Boots: The Last Wish', 1, '1:43:00', '2022-12-21', '2023-3-10'::DATE, 3);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (13, 13);
@@ -354,7 +414,7 @@ VALUES (13, 4);
 
 --- teen titans
 INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate, filmstudioid)
-VALUES ('W000000014', 'Teen Titans Go! To the Movies', 1, '1:24:00', '2018-7-27', CURRENT_DATE, 2);
+VALUES ('W018211769', 'Teen Titans Go! To the Movies', 1, '1:24:00', '2018-7-27', '2023-3-10'::DATE, 2);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (14, 15);
@@ -373,7 +433,7 @@ VALUES (14, 4);
 
 --- shrek
 INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate, filmstudioid)
-VALUES ('W000000015', 'Shrek', 1, '1:30:00', '2001-5-18', CURRENT_DATE, 3);
+VALUES ('W996437146', 'Shrek', 1, '1:30:00', '2001-5-18', '2023-3-10'::DATE, 3);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (15, 18);
@@ -386,17 +446,20 @@ VALUES (15, 4);
 
 --- paul blart
 INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate, filmstudioid)
-VALUES ('W000000016', 'Paul Blart: Mall Cop', 1, '1:31:00', '2009-1-15', CURRENT_DATE, 4);
+VALUES ('W681924809', 'Paul Blart: Mall Cop', 1, '1:31:00', '2009-1-15', '2023-3-10'::DATE, 4);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (16, 20);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (16, 37);
 
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (16, 4);
 
 --- titanic
 INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate, filmstudioid)
-VALUES ('W000000017', 'Titanic', 1, '3:14:00', '1997-12-19', CURRENT_DATE, 6);
+VALUES ('W092662044', 'Titanic', 1, '3:14:00', '1997-12-19', '2023-3-10'::DATE, 6);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (17, 21);
@@ -412,17 +475,20 @@ VALUES (17, 10);
 
 --- encanto
 INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate, filmstudioid)
-VALUES ('W000000018', 'Encanto', 1, '1:42:00', '2021-11-24', CURRENT_DATE, 1);
+VALUES ('W194746005', 'Encanto', 1, '1:42:00', '2021-11-24', '2023-3-10'::DATE, 1);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (18, 23);
+
+INSERT INTO VideoToActor(VideoID, ActorID)
+VALUES (18, 38);
 
 INSERT INTO VideoToGenre(VideoID, GenreID)
 VALUES (18, 4);
 
 --- the incredibles
 INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate, filmstudioid)
-VALUES ('W000000019', 'The Incredibles', 1, '1:55:00', '2021-11-5', CURRENT_DATE, 1);
+VALUES ('W871252510', 'The Incredibles', 1, '1:55:00', '2021-11-5', '2023-3-10'::DATE, 1);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (19, 24);
@@ -438,7 +504,7 @@ VALUES (19, 4);
 
 --- zootopia
 INSERT INTO Video (videonum, name, languageid, duration, releasedate, uploaddate, filmstudioid)
-VALUES ('W000000020', 'Zootopia', 1, '1:49:00', '2016-3-4', CURRENT_DATE, 1);
+VALUES ('W362108398', 'Zootopia', 1, '1:49:00', '2016-3-4', '2023-3-10'::DATE, 1);
 
 INSERT INTO VideoToActor(VideoID, ActorID)
 VALUES (20, 26);
@@ -631,52 +697,52 @@ VALUES ('taltal', 'goodtalon', 'talon@gmail.com', '4257890123', '678 9th AVE NE'
 ---
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (1, 1, CURRENT_DATE);
+VALUES (1, 1, '2023-03-01 12:10:45'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (1, 2, CURRENT_DATE);
+VALUES (1, 2, '2023-03-01 14:34:16'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (1, 4, CURRENT_DATE);
+VALUES (1, 4, '2023-03-07 17:00:56'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (2, 2, CURRENT_DATE);
+VALUES (2, 2, '2023-03-01 17:11:04'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (2, 3, CURRENT_DATE);
+VALUES (2, 3, '2023-03-01 18:54:28'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (3, 2, CURRENT_DATE);
+VALUES (3, 2, '2023-03-01 02:50:33'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (4, 2, CURRENT_DATE);
+VALUES (4, 2, '2023-03-01 15:11:51'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (1, 12, CURRENT_DATE);
+VALUES (1, 12, '2023-03-08 06:20:30'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (1, 10, CURRENT_DATE);
+VALUES (1, 10, '2023-03-08 08:14:29'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (3, 5, CURRENT_DATE);
+VALUES (3, 5, '2023-03-08 14:08:32'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (5, 8, CURRENT_DATE);
+VALUES (5, 8, '2023-03-09 12:02:21'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (5, 9, CURRENT_DATE);
+VALUES (5, 9, '2023-03-09 13:38:00'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (5, 10, CURRENT_DATE);
+VALUES (5, 10, '2023-03-09 15:16:17'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (2, 5, CURRENT_DATE);
+VALUES (2, 5, '2023-03-08 12:53:05'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (5, 13, CURRENT_DATE);
+VALUES (5, 13, '2023-03-10 01:06:24'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (5, 18, CURRENT_DATE);
+VALUES (5, 18, '2023-03-10 03:10:58'::TIMESTAMP);
 
 INSERT INTO WatchRecord(CustomerID, VideoID, WatchTime)
-VALUES (5, 20, CURRENT_DATE);
+VALUES (5, 20, '2023-03-10 05:21:40'::TIMESTAMP);
