@@ -182,6 +182,98 @@ app.get('/mediaTrends/getGenres/:videonumber', async (req, res) => {
   }
 });
 
+app.get('/mediaTrends/retrieveByFavorite/:username', async (req, res) => {
+  try {
+    let username = req.params.username;
+    let favType = req.query.factor;
+    if (username && favType) {
+      let isNotExistingUser = await isNewUser(username);
+      if (isNotExistingUser) {
+        res.status(INVALID_PARAM_ERROR);
+        res.type("text").send("Not a valid username");
+        return;
+      }
+      if ((favType !== "Genre") && (favType !== "Language") && (favType !== "Filmstudio") && (favType !== "Actor")) {
+        res.status(INVALID_PARAM_ERROR);
+        res.type("text").send("Not a valid query type. Valid: Genre, Language, Filmstudio, Actor");
+        return;
+      }
+
+      let query;
+
+      if (favType == "Genre") {
+        let favGenre = await getFavoriteGenre(username);
+
+        let db = await getDBConnection('sample');
+
+        query = "";
+
+        let result = await db.query(query, [favGenre]);
+        res.json({
+          "result": result.rows
+        });
+        await db.end();
+        return;
+      }
+
+      if (favType == "Language") {
+        let favLanguage = await getFavoriteLanguage(username);
+        // res.type("text").send(favLanguage);
+
+        let db = await getDBConnection('sample');
+
+        query = "";
+
+        let result = await db.query(query, [favLanguage]);
+        res.json({
+          "result": result.rows
+        });
+        await db.end();
+        return;
+      }
+
+      if (favType == "Filmstudio") {
+        let favFilmStudio = await getFavoriteFilmStudio(username);
+
+        //res.type("text").send(favFilmStudio);
+        let db = await getDBConnection('sample');
+
+        query = "";
+
+        let result = await db.query(query, [favFilmStudio]);
+        res.json({
+          "result": result.rows
+        });
+        await db.end();
+        return;
+      }
+
+      if (favType == "Actor") {
+        let favActor = await getFavoriteActor(username);
+        //res.type("text").send(favActor);
+
+        let db = await getDBConnection('sample');
+
+        query = "";
+
+        let result = await db.query(query, [favActor]);
+        res.json({
+          "result": result.rows
+        });
+        await db.end();
+        return;
+      }
+    } else {
+      res.status(INVALID_PARAM_ERROR);
+      res.type("text").send(INVALID_PARAM_ERROR_MSG);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(SERVER_ERROR);
+    res.type("text").send(SERVER_ERROR_MSG);
+  }
+});
+
 app.post('/mediaTrends/verifyCredentials', async (req, res) => {
   try {
     let username = req.body.username;
@@ -427,6 +519,70 @@ app.post('/mediaTrends/insertWatchRecord', async (req, res) => {
     res.type("text").send(SERVER_ERROR_MSG);
   }
 });
+
+async function getFavoriteLanguage(username) {
+  let db = await getDBConnection('sample');
+
+  let query = "SELECT Language.name, COUNT (*) as count " +
+              "FROM Language " +
+                "JOIN Video ON (Video.languageID = Language.id) " +
+                "JOIN WatchRecord ON (WatchRecord.videoID = Video.id) " +
+                "JOIN Customer ON (Customer.id = WatchRecord.customerid) " +
+              "WHERE Customer.username = $1 " +
+              "GROUP BY Language.id " +
+              "ORDER BY count DESC " +
+              "LIMIT 1;";
+
+  let result = await db.query(query, [username]);
+
+  await db.end();
+
+  return result.rows[0]['name'];
+}
+
+async function getFavoriteActor(username) {
+  let db = await getDBConnection('sample');
+
+  let query = "SELECT Actor.firstname, Actor.lastname, COUNT (*) AS count " +
+              "FROM Customer " +
+                "JOIN Watchrecord ON ( Customer.id = Watchrecord.customerid) " +
+                "JOIN Video ON ( Watchrecord.videoid = Video.id) " +
+                "JOIN Videotoactor ON ( Videotoactor.videoid = Video.id) " +
+                "JOIN Actor ON ( Actor.id = Videotoactor.Actorid) " +
+              "WHERE Customer.username = $1 " +
+              "GROUP BY Actor.id " +
+              "ORDER BY count DESC " +
+              "LIMIT 1;";
+
+  let result = await db.query(query, [username]);
+
+  await db.end();
+
+  let firstname = result.rows[0]['firstname'];
+  let lastname = result.rows[0]['lastname'];
+
+  return (firstname + " " + lastname);
+}
+
+async function getFavoriteFilmStudio(username) {
+  let db = await getDBConnection('sample');
+
+  let query = "SELECT Filmstudio.name, COUNT (*) as count " +
+              "FROM FilmStudio " +
+                "JOIN Video ON (Video.filmstudioID = FilmStudio.id) " +
+                "JOIN WatchRecord ON (WatchRecord.videoID = Video.id) " +
+                "JOIN Customer ON (Customer.id = WatchRecord.customerid) " +
+              "WHERE Customer.username = $1 " +
+              "GROUP BY FilmStudio.id " +
+              "LIMIT 1;";
+
+  let result = await db.query(query, [username]);
+
+  await db.end();
+
+  return result.rows[0]['name'];
+}
+
 
 async function getFavoriteGenre(username) {
   let db = await getDBConnection('sample');
