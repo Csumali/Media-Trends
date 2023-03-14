@@ -48,12 +48,17 @@
             e.preventDefault(); // prevent default behavior of submit (page refresh)
             loadFiltered(); // intended response function
         });
+        loadRecommended();
     }
 
     function loadRecommended() {
         //console.log(id("favorite").value);
+        id("all-movies-container").innerHTML = "";
         let value = id("favorite").value;
         if(id("favorite").selectedIndex === 0) {
+            let heading = gen("h2");
+            heading.textContent = "Top 10 Trending Movies";
+            id("all-movies-container").appendChild(heading);
             fetch(BASE_URL + "getTrending")
             .then(statusCheck)
             .then(res => res.json())
@@ -61,6 +66,9 @@
             // .then(check)
             .catch(console.log);
         } else {
+            let heading = gen("h2");
+            heading.textContent = "Recommended Movies";
+            id("all-movies-container").appendChild(heading);
             fetch(BASE_URL + "retrieveByFavorite/" + username + "?factor=" + value)
             .then(statusCheck)
             .then(res => res.json())
@@ -70,15 +78,167 @@
         }
     }
 
-    function loadData(response) {
-        console.log(response['result']);
+    async function loadData(response) {
+        // let resp = response['result'][0]['filmstudio'];
+        // if (resp) {
+        //     console.log(resp);
+        // }
+        let container = gen("ul");
+
+
+        let size = response['result'].length;
+        for (let i = 0; i < size; i++) {
+            let videonum = response['result'][i]['videonum'];
+            let genreList = await getGenre(videonum);
+            let actorList = await getActors(videonum);
+            let list = gen("li");
+
+            let movieCard = gen("div");
+            movieCard.classList.add("movie-card");
+
+            let movieDetails = gen("div");
+            movieDetails.classList.add("movie-details");
+
+            let mtitle = gen("h3");
+            mtitle.textContent = (i + 1) +". " + response['result'][i]['name'];
+            movieDetails.appendChild(mtitle);
+
+            let genreP = gen("p");
+            let genreHead = gen("strong");
+            genreHead.textContent = "Genre: ";
+
+            let genreText = document.createTextNode(genreList);
+            genreP.appendChild(genreHead);
+            genreP.appendChild(genreText);
+            movieDetails.appendChild(genreP);
+
+
+            let langP = gen("p");
+            let langHead = gen("strong");
+            langHead.textContent = "Language: ";
+
+            let langText = document.createTextNode(response['result'][i]['language']);
+            langP.appendChild(langHead);
+            langP.appendChild(langText);
+            movieDetails.appendChild(langP);
+
+
+            let studioP = gen("p");
+            let studioHead = gen("strong");
+            studioHead.textContent = "Film Studio: ";
+
+
+            studioP.appendChild(studioHead);
+            if (response['result'][i]['filmstudio']) {
+                let studioText = document.createTextNode(response['result'][i]['filmstudio']);
+                studioP.appendChild(studioText);
+            }
+            movieDetails.appendChild(studioP);
+
+
+            let castP = gen("p");
+            let castHead = gen("strong");
+            castHead.textContent = "Cast: ";
+
+            let castText = document.createTextNode(actorList);
+            castP.appendChild(castHead);
+            castP.appendChild(castText);
+            movieDetails.appendChild(castP);
+
+
+            movieCard.appendChild(movieDetails);
+            list.appendChild(movieCard);
+            container.appendChild(list);
+        }
+
+        id("all-movies-container").appendChild(container);
+    }
+
+    async function getGenre(videonum) {
+        //console.log(videonum);
+        return fetch(BASE_URL + "getGenres/" + videonum)
+            .then(statusCheck)
+            .then(res => res.json())
+            .then(processGenre)
+            .then(result => {
+                return "" + result;
+              })
+            .catch(console.log);
+    }
+
+    async function getActors(videonum) {
+        return fetch(BASE_URL + "getActors/" + videonum)
+            .then(statusCheck)
+            .then(res => res.json())
+            .then(processActors)
+            .then(result => {
+                return "" + result;
+              })
+            .catch(console.log);
+    }
+
+    function processGenre(response) {
+        //console.log(response['result']);
+        let size = response['result'].length;
+        let retValue = response['result'][0]['name'];
+        for (let i = 1; i < size; i++) {
+            retValue += ", " + response['result'][i]['name'];
+        }
+        //console.log(retValue);
+        return retValue;
+    }
+
+    function processActors(response) {
+        let size = response['result'].length;
+        let retValue = response['result'][0]['firstname'] + " " + response['result'][0]['lastname'];
+        for (let i = 1; i < size; i++) {
+            retValue += ", " + response['result'][i]['firstname'] + " " + response['result'][i]['lastname'];
+        }
+        return retValue;
     }
 
     function loadFiltered() {
-        console.log(id("genre").value);
-        console.log(id("language").value);
-        console.log(id("studio").value);
-        console.log(id("afn").value + id("aln").value);
+        let genre = "=" + id("genre").value;
+        let language = "=" + id("language").value;
+        let studio = "=" + id("studio").value;
+        let actorfirst = "=" + id("afn").value;
+        let actorlast = "=" + id("aln").value;
+        if(id("genre").selectedIndex === 0) {
+            genre = "";
+        }
+        if(id("language").selectedIndex === 0) {
+            language = "";
+        }
+        if(id("studio").selectedIndex === 0) {
+            studio = "";
+        }
+        if(id("afn").value === "") {
+            actorfirst = "";
+        }
+        if(id("afn").value === "") {
+            actorlast = "";
+        }
+
+        if ((id("genre").selectedIndex === 0) && (id("language").selectedIndex === 0) && (id("afn").value === "") && (id("afn").value === "")) {
+            loadRecommended();
+            return;
+        }
+
+        id("all-movies-container").innerHTML = "";
+        let heading = gen("h2");
+        heading.textContent = "Recommended Movies";
+        id("all-movies-container").appendChild(heading);
+        let queryString = "?genre" + genre + "&language" + language + "&filmstudio" + studio +
+        "&actorFName" + actorfirst + "&actorLName" + actorlast;
+
+        console.log(queryString);
+
+        fetch(BASE_URL + "retrieveByFilter" + queryString)
+            .then(statusCheck)
+            .then(res => res.json())
+            .then(loadData)
+            // .then(check)
+            .catch(console.log);
     }
 
     function login() {
