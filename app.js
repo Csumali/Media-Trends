@@ -1083,7 +1083,7 @@ async function popularByActorAndFilmstudio(actorFName, actorLName, filmstudio) {
 async function popularByFilmStudio(favFilmStudio) {
   let db = await getDBConnection('sample');
 
-  let query = "SELECT videonum, Video.name AS title, Language.name AS language, FilmStudio.name AS filmstudio, y.views " +
+  let query = "SELECT videonum, Video.name AS name, Language.name AS language, FilmStudio.name AS filmstudio, y.views " +
             "FROM Video " +
                 "JOIN ( " +
                       "SELECT x.id, COUNT(*) AS views " +
