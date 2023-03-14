@@ -102,6 +102,7 @@
             let city = id("city").value;
             let state = id("state").value;
             let pcode = id("pc").value;
+        if (pcode) {
             if (pcode.length !== 5) {
                 id("error-msg").textContent = "Invalid postal code. Please try again.";
                 id("error-msg").classList.remove("hidden");
@@ -109,6 +110,8 @@
                 window.scrollTo(0, 0);
                 return;
             }
+        }
+
 
             let param = new FormData();
             param.append("username", username);
