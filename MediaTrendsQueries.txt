@@ -79,11 +79,11 @@ LIMIT 1;
 
 
 \qecho Genre:
-SELECT Video.videonum, Video.name, Video.releasedate, Video.language, COUNT (*) AS watch_count
+SELECT Video.videonum, Video.name, Video.languageID, Video.filmstudioID, COUNT (*) AS watch_count
 FROM Video
 	JOIN Videotogenre ON ( Video.id = Videotogenre.videoid)
 	JOIN Genre ON ( Videotogenre.genreid = Genre.id)
-WHERE Genre.name = <genre_name>
+WHERE Genre.name = 'Action'
 GROUP BY Video.id
 ORDER BY watch_count DESC, Video.releasedate DESC
 LIMIT 10;

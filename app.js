@@ -199,68 +199,39 @@ app.get('/mediaTrends/retrieveByFavorite/:username', async (req, res) => {
         return;
       }
 
-      let query;
-
       if (favType == "Genre") {
         let favGenre = await getFavoriteGenre(username);
-
-        let db = await getDBConnection('sample');
-
-        query = "";
-
-        let result = await db.query(query, [favGenre]);
+        let result = await popularByGenre(favGenre);
         res.json({
-          "result": result.rows
+          "result": result
         });
-        await db.end();
         return;
       }
 
       if (favType == "Language") {
         let favLanguage = await getFavoriteLanguage(username);
-        // res.type("text").send(favLanguage);
-
-        let db = await getDBConnection('sample');
-
-        query = "";
-
-        let result = await db.query(query, [favLanguage]);
+        let result = await popularByLanguage(favLanguage);
         res.json({
-          "result": result.rows
+          "result": result
         });
-        await db.end();
         return;
       }
 
       if (favType == "Filmstudio") {
         let favFilmStudio = await getFavoriteFilmStudio(username);
-
-        //res.type("text").send(favFilmStudio);
-        let db = await getDBConnection('sample');
-
-        query = "";
-
-        let result = await db.query(query, [favFilmStudio]);
+        let result = await popularByFilmStudio(favFilmStudio);
         res.json({
-          "result": result.rows
+          "result": result
         });
-        await db.end();
         return;
       }
 
       if (favType == "Actor") {
         let favActor = await getFavoriteActor(username);
-        //res.type("text").send(favActor);
-
-        let db = await getDBConnection('sample');
-
-        query = "";
-
-        let result = await db.query(query, [favActor]);
+        let result = await popularByActor(favActor);
         res.json({
-          "result": result.rows
+          "result": result
         });
-        await db.end();
         return;
       }
     } else {
@@ -540,10 +511,120 @@ async function getFavoriteLanguage(username) {
   return result.rows[0]['name'];
 }
 
+async function popularByGenre(favGenre) {
+  let db = await getDBConnection('sample');
+
+  let query = "SELECT videonum, Video.name AS title, Language.name AS language, FilmStudio.name AS filmstudio, y.views " +
+            "FROM Video " +
+                "JOIN ( " +
+                      "SELECT x.id, COUNT(*) AS views " +
+                      "FROM ( " +
+                        "SELECT Video.id " +
+                        "FROM Video " +
+                          "JOIN Videotogenre ON (Video.id = Videotogenre.videoid) " +
+                          "JOIN Genre ON (Videotogenre.genreid = Genre.id) " +
+                        "WHERE Genre.name = $1 " +
+                      ") AS x " +
+                      "JOIN Watchrecord ON (x.id = Watchrecord.videoid) " +
+                      "GROUP BY x.id " +
+                    ") AS y ON (y.id = Video.id) " +
+                "JOIN Language ON (Video.languageID = Language.id) " +
+                "LEFT JOIN FilmStudio ON (FilmStudio.id = Video.filmStudioID) " +
+            "ORDER BY views DESC " +
+            "LIMIT 10;";
+
+  let result = await db.query(query, [favGenre]);
+  await db.end();
+
+  return result.rows;
+}
+
+async function popularByActor(favActor) {
+  let db = await getDBConnection('sample');
+
+  let query = "SELECT videonum, Video.name AS title, Language.name AS language, FilmStudio.name AS filmstudio, y.views " +
+            "FROM Video " +
+                "JOIN ( " +
+                      "SELECT x.id, COUNT(*) AS views " +
+                      "FROM ( " +
+                        "SELECT Video.id " +
+                        "FROM Video " +
+                          "JOIN VideotoActor ON (Video.id = VideotoActor.videoid) " +
+                          "JOIN Actor ON (VideotoActor.actorID = Actor.id) " +
+                        "WHERE Actor.id = $1 " +
+                      ") AS x " +
+                      "JOIN Watchrecord ON (x.id = Watchrecord.videoid) " +
+                      "GROUP BY x.id " +
+                    ") AS y ON (y.id = Video.id) " +
+                "JOIN Language ON (Video.languageID = Language.id) " +
+                "LEFT JOIN FilmStudio ON (FilmStudio.id = Video.filmStudioID) " +
+            "ORDER BY views DESC " +
+            "LIMIT 10;";
+
+  let result = await db.query(query, [favActor['id']]);
+  await db.end();
+
+  return result.rows;
+}
+
+async function popularByLanguage(favLanguage) {
+  let db = await getDBConnection('sample');
+
+  let query = "SELECT videonum, Video.name AS title, Language.name AS language, FilmStudio.name AS filmstudio, y.views " +
+            "FROM Video " +
+                "JOIN ( " +
+                      "SELECT x.id, COUNT(*) AS views " +
+                      "FROM ( " +
+                        "SELECT Video.id " +
+                        "FROM Video " +
+                          "JOIN Language ON (Video.languageid = Language.id) " +
+                        "WHERE Language.name = $1 " +
+                      ") AS x " +
+                      "JOIN Watchrecord ON (x.id = Watchrecord.videoid) " +
+                      "GROUP BY x.id " +
+                    ") AS y ON (y.id = Video.id) " +
+                "JOIN Language ON (Video.languageID = Language.id) " +
+                "LEFT JOIN FilmStudio ON (FilmStudio.id = Video.filmStudioID) " +
+            "ORDER BY views DESC " +
+            "LIMIT 10;";
+
+  let result = await db.query(query, [favLanguage]);
+  await db.end();
+
+  return result.rows;
+}
+
+async function popularByFilmStudio(favFilmStudio) {
+  let db = await getDBConnection('sample');
+
+  let query = "SELECT videonum, Video.name AS title, Language.name AS language, FilmStudio.name AS filmstudio, y.views " +
+            "FROM Video " +
+                "JOIN ( " +
+                      "SELECT x.id, COUNT(*) AS views " +
+                      "FROM ( " +
+                        "SELECT Video.id " +
+                        "FROM Video " +
+                          "JOIN FilmStudio ON (Video.filmStudioID = FilmStudio.id) " +
+                        "WHERE Filmstudio.name = $1 " +
+                      ") AS x " +
+                      "JOIN Watchrecord ON (x.id = Watchrecord.videoid) " +
+                      "GROUP BY x.id " +
+                    ") AS y ON (y.id = Video.id) " +
+                "JOIN Language ON (Video.languageID = Language.id) " +
+                "LEFT JOIN FilmStudio ON (FilmStudio.id = Video.filmStudioID) " +
+            "ORDER BY views DESC " +
+            "LIMIT 10;";
+
+  let result = await db.query(query, [favFilmStudio]);
+  await db.end();
+
+  return result.rows;
+}
+
 async function getFavoriteActor(username) {
   let db = await getDBConnection('sample');
 
-  let query = "SELECT Actor.firstname, Actor.lastname, COUNT (*) AS count " +
+  let query = "SELECT Actor.id, Actor.firstname, Actor.lastname, COUNT (*) AS count " +
               "FROM Customer " +
                 "JOIN Watchrecord ON ( Customer.id = Watchrecord.customerid) " +
                 "JOIN Video ON ( Watchrecord.videoid = Video.id) " +
@@ -558,10 +639,11 @@ async function getFavoriteActor(username) {
 
   await db.end();
 
-  let firstname = result.rows[0]['firstname'];
-  let lastname = result.rows[0]['lastname'];
+  //let firstname = result.rows[0]['firstname'];
+  //let lastname = result.rows[0]['lastname'];
 
-  return (firstname + " " + lastname);
+  //return (firstname + " " + lastname);
+  return result.rows[0];
 }
 
 async function getFavoriteFilmStudio(username) {

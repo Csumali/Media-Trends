@@ -7,7 +7,16 @@ body {
     background-color: #f2f2f2;
     margin: 0;
 }
-  
+
+h1 a {
+    text-decoration: none !important;
+}
+
+h1 a:visited {
+    text-decoration: none !important;
+    color: inherit;
+}
+
 .navbar {
     background-color: #333;
     color: #fff;
@@ -16,12 +25,23 @@ body {
     align-items: center;
     padding: 10px 20px;
 }
-  
+
+.navbar-menu button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    height: 50px;
+}
+
+.navbar-menu button:hover {
+    background-color: #8a8989;
+}
+
 .logo {
     font-size: 24px;
     margin: 0;
 }
-  
+
 .navbar-menu {
     list-style: none;
     margin: 0;
@@ -37,7 +57,7 @@ body {
     color: #fff;
     text-decoration: none;
 }
-  
+
 .container {
     max-width: 1200px;
     margin: 30px auto;
@@ -65,7 +85,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
-  
+
 .filter-options {
     padding: 8px;
     font-size: 16px;
@@ -100,7 +120,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
-    
+
 .trending-movies h2 {
     font-size: 30px;
     font-weight: bold;
@@ -110,19 +130,25 @@ body {
 ul {
     list-style: none;
 }
-    
+
 .movie-card {
     border: 1px solid #ccc;
     padding: 20px;
     margin-bottom: 20px;
 }
-    
+
 .movie-details h3 {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
 }
-    
+
 .movie-details p {
     margin-bottom: 5px;
+}
+
+.hidden {
+    /* Used to override other display properties,
+     * .hidden should always take highest precedence */
+    display: none !important;
 }

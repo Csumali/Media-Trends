@@ -39,6 +39,10 @@
                 window.scrollTo(0, 0);
             });
         }
+        id("sign-out-button").addEventListener("click", function() {
+            sessionStorage.setItem('username', '');
+            window.location.href = 'login.html';
+        });
     }
 
     async function loadUserData() {
