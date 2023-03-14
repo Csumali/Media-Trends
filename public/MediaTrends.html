@@ -10,10 +10,10 @@
 </head>
 <body>
     <nav class="navbar">
-        <h1 class="logo">Media Trends</h1>
+        <h1 class="logo"><a href="MediaTrends.html">Media Trends</a></h1>
         <ul class="navbar-menu">
-            <li><a href="#">Sign Out</a></li>
-            <li><a href="#">Update Profile</a></li>
+            <li><button id="sign-in-out-button">Sign In</button></li>
+            <li><button id="update-button">Update Profile</button></li>
         </ul>
     </nav>
     <section id="recommend-movies-by-favorite">
@@ -30,7 +30,7 @@
                             <option value="cast">Cast</option>
                         </select>
                     </div>
-                    <button type="submit">Recommend Movies</button>
+                    <button type="submit" id="recommend-button">Recommend Movies</button>
                 </form>
             </div>
         </div>
@@ -46,8 +46,11 @@
                             <option value="all">All Genres</option>
                             <option value="action">Action</option>
                             <option value="comedy">Comedy</option>
+                            <option value="crime">Crime</option>
+                            <option value="documentary">Documentary</option>
                             <option value="drama">Drama</option>
                             <option value="horror">Horror</option>
+                            <option value="mystery">Mystery</option>
                             <option value="romance">Romance</option>
                             <option value="sci-fi">Sci-Fi</option>
                             <option value="thriller">Thriller</option>
@@ -60,10 +63,10 @@
                             <option value="english">English</option>
                             <option value="spanish">Spanish</option>
                             <option value="french">French</option>
-                            <option value="german">German</option>
+                            <option value="hindi">Hindi</option>
                             <option value="mandarin">Mandarin</option>
                             <option value="japanese">Japanese</option>
-                            <option value="korean">Korean</option>
+                            <option value="korean">Italian</option>
                         </select>
                     </div>
                     <div class="form-element">
@@ -80,9 +83,10 @@
                             <option value="pixar">Pixar</option>
                         </select>
                     </div>
-                    <div class="form-element">
-                        <label for="cast">Cast:</label>
-                        <input type="text" id="cast" name="cast" placeholder="Enter cast name">
+                    <div class="cast-form">
+                        <label for="cast-first-name">Cast:</label>
+                        <input type="text" id="cast-first-name" name="cast-first-name" placeholder="Enter first name">
+                        <input type="text" id="cast-last-name" name="cast-last-name" placeholder="Enter last name">
                     </div>
                     <button type="submit">Apply Filters</button>
                 </form>
