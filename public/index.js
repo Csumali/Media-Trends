@@ -40,6 +40,7 @@
         id("update-button").addEventListener("click", function() {
             window.location.href = 'updateuserinfo.html';
         });
+        //id("recommend-button").addEventListener("click", )
     }
 
     function updateInfo() {
