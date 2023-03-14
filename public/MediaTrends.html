@@ -20,17 +20,17 @@
         <div class="container">
             <div class="favorite-container">
                 <h2>Recommend Movies By Favorite:</h2>
-                <form>
+                <form id="recommend-button">
                     <div class="form-element">
                         <select id="favorite">
                             <option value="trending">Trending/Popular</option>
-                            <option value="genre">Genre</option>
-                            <option value="language">Language</option>
-                            <option value="studio">Film Studio</option>
-                            <option value="cast">Cast</option>
+                            <option value="Genre">Genre</option>
+                            <option value="Language">Language</option>
+                            <option value="Filmstudio">Film Studio</option>
+                            <option value="Actor">Cast</option>
                         </select>
                     </div>
-                    <button type="submit" id="recommend-button">Recommend Movies</button>
+                    <button type="submit">Recommend Movies</button>
                 </form>
             </div>
         </div>
@@ -39,54 +39,52 @@
         <div class="container">
             <div class="filter-options">
                 <h2>Filter Options</h2>
-                <form>
+                <form id="apply-filters-button">
                     <div class="form-element">
                         <label for="genre">Genre:</label>
                         <select id="genre">
                             <option value="all">All Genres</option>
-                            <option value="action">Action</option>
-                            <option value="comedy">Comedy</option>
-                            <option value="crime">Crime</option>
-                            <option value="documentary">Documentary</option>
-                            <option value="drama">Drama</option>
-                            <option value="horror">Horror</option>
-                            <option value="mystery">Mystery</option>
-                            <option value="romance">Romance</option>
-                            <option value="sci-fi">Sci-Fi</option>
-                            <option value="thriller">Thriller</option>
+                            <option value="Action">Action</option>
+                            <option value="Comedy">Comedy</option>
+                            <option value="Crime">Crime</option>
+                            <option value="Documentary">Documentary</option>
+                            <option value="Drama">Drama</option>
+                            <option value="Horror">Horror</option>
+                            <option value="Mystery">Mystery</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Sci fi">Sci-Fi</option>
+                            <option value="Thriller">Thriller</option>
                         </select>
                     </div>
                     <div class="form-element">
                         <label for="language">Language:</label>
                         <select id="language">
                             <option value="all">All Languages</option>
-                            <option value="english">English</option>
-                            <option value="spanish">Spanish</option>
-                            <option value="french">French</option>
-                            <option value="hindi">Hindi</option>
-                            <option value="mandarin">Mandarin</option>
-                            <option value="japanese">Japanese</option>
-                            <option value="korean">Italian</option>
+                            <option value="English">English</option>
+                            <option value="Mandarin">Mandarin</option>
+                            <option value="French">French</option>
+                            <option value="Spanish">Spanish</option>
+                            <option value="Hindi">Hindi</option>
+                            <option value="Japanese">Japanese</option>
+                            <option value="Italian">Italian</option>
                         </select>
                     </div>
                     <div class="form-element">
                         <label for="studio">Film Studio:</label>
                         <select id="studio">
                             <option value="all">All Studios</option>
-                            <option value="disney">Disney</option>
-                            <option value="paramount">Paramount</option>
-                            <option value="universal">Universal</option>
-                            <option value="warner-bros">Warner Bros.</option>
-                            <option value="sony">Sony</option>
-                            <option value="20th-century">20th Century</option>
-                            <option value="dreamworks">DreamWorks</option>
-                            <option value="pixar">Pixar</option>
+                            <option value="Walt Disney Studios">Disney</option>
+                            <option value="Warner Bros">Warner Bros.</option>
+                            <option value="Universal Pictures">Universal</option>
+                            <option value="Sony Pictures">Sony</option>
+                            <option value="Paramount Pictures">Paramount</option>
+                            <option value="20th Century Fox">20th Century</option>
                         </select>
                     </div>
                     <div class="cast-form">
                         <label for="cast-first-name">Cast:</label>
-                        <input type="text" id="cast-first-name" name="cast-first-name" placeholder="Enter first name">
-                        <input type="text" id="cast-last-name" name="cast-last-name" placeholder="Enter last name">
+                        <input type="text" id="afn" name="cast-first-name" placeholder="Enter first name">
+                        <input type="text" id="aln" name="cast-last-name" placeholder="Enter last name">
                     </div>
                     <button type="submit">Apply Filters</button>
                 </form>

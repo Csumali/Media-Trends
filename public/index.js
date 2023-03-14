@@ -40,11 +40,45 @@
         id("update-button").addEventListener("click", function() {
             window.location.href = 'updateuserinfo.html';
         });
-        //id("recommend-button").addEventListener("click", )
+        id("recommend-button").addEventListener("submit", function (e) {
+            e.preventDefault(); // prevent default behavior of submit (page refresh)
+            loadRecommended(); // intended response function
+        });
+        id("apply-filters-button").addEventListener("submit", function (e) {
+            e.preventDefault(); // prevent default behavior of submit (page refresh)
+            loadFiltered(); // intended response function
+        });
     }
 
-    function updateInfo() {
-        window.location.href = 'updateuserinfo.html';
+    function loadRecommended() {
+        //console.log(id("favorite").value);
+        let value = id("favorite").value;
+        if(id("favorite").selectedIndex === 0) {
+            fetch(BASE_URL + "getTrending")
+            .then(statusCheck)
+            .then(res => res.json())
+            .then(loadData)
+            // .then(check)
+            .catch(console.log);
+        } else {
+            fetch(BASE_URL + "retrieveByFavorite/" + username + "?factor=" + value)
+            .then(statusCheck)
+            .then(res => res.json())
+            .then(loadData)
+            // .then(check)
+            .catch(console.log);
+        }
+    }
+
+    function loadData(response) {
+        console.log(response['result']);
+    }
+
+    function loadFiltered() {
+        console.log(id("genre").value);
+        console.log(id("language").value);
+        console.log(id("studio").value);
+        console.log(id("afn").value + id("aln").value);
     }
 
     function login() {
