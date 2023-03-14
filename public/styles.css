@@ -105,11 +105,12 @@ h1 a:visited {
 }
 
 .filter-options input[type="text"] {
-    width: 80%;
+    width: 20%;
     padding: 5px;
     margin-bottom: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    display: inline-block;
 }
 
 .filter-options button[type="submit"] {
