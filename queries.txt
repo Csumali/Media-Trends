@@ -140,3 +140,13 @@ FROM Video
     LEFT JOIN FilmStudio ON (FilmStudio.id = Video.filmStudioID)
 ORDER BY views DESC
 LIMIT 10;
+
+
+
+SELECT CASE WHEN EXISTS (
+          SELECT *
+          FROM Actor
+          WHERE firstname = 'Chris' AND lastname = 'Evans'
+      ) THEN TRUE
+      ELSE FALSE
+      END;
