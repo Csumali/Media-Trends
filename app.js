@@ -327,7 +327,7 @@ app.get('/mediaTrends/retrieveByFilter', async (req, res) => {
 
       //actor
       if(!genre && !language && !filmstudio && actorFName && actorLName) {
-        let result = await popularByActor(actorFName, actorLName);
+        let result = await popularByActorOnly(actorFName, actorLName);
         res.json({
           "result": result
         });
@@ -704,6 +704,30 @@ async function getFavoriteLanguage(username) {
   await db.end();
 
   return result.rows[0]['name'];
+}
+
+async function popularByActorOnly(actorFName, actorLName) {
+  let db = await getDBConnection('sample');
+
+  let query = "SELECT videonum, X.name, language, filmstudio, views " +
+              "FROM ( " +
+                  "SELECT videonum, V.id, V.name, L.name AS language, FS.name AS filmstudio, COUNT(*) AS views " +
+                  "FROM WatchRecord WR " +
+                      "JOIN Video V ON (V.id = WR.videoid) " +
+                      "JOIN Language L ON (L.id = V.languageid) " +
+                      "LEFT JOIN FilmStudio FS ON (FS.id = V.filmstudioid) " +
+                  "GROUP BY V.id, L.id, FS.id " +
+              ") AS X " +
+                  "JOIN VideoToActor VTA ON (VTA.videoid = X.id) " +
+                  "JOIN Actor A ON (A.id = VTA.actorid) " +
+              "WHERE A.firstname = $1 AND A.lastname = $2 " +
+              "ORDER BY views DESC " +
+              "LIMIT 10;";
+
+  let result = await db.query(query, [actorFName, actorLName]);
+  await db.end();
+
+  return result.rows;
 }
 
 async function popularByGenre(favGenre) {
@@ -1083,7 +1107,7 @@ async function popularByActorAndFilmstudio(actorFName, actorLName, filmstudio) {
 async function popularByFilmStudio(favFilmStudio) {
   let db = await getDBConnection('sample');
 
-  let query = "SELECT videonum, Video.name AS title, Language.name AS language, FilmStudio.name AS filmstudio, y.views " +
+  let query = "SELECT videonum, Video.name AS name, Language.name AS language, FilmStudio.name AS filmstudio, y.views " +
             "FROM Video " +
                 "JOIN ( " +
                       "SELECT x.id, COUNT(*) AS views " +
