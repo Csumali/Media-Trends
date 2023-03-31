@@ -6,8 +6,10 @@ By default, the website displays the most popular and trending videos on the pla
 Customers can log in with their username and password to view recommended media based on their watch history. The algorithm takes into account the user's most viewed genre, language, film studios, and cast to provide personalized recommendations.
 
 Screenshots of the application's login and main page:
+### Login
 ![Login Page](images/login.png)
+### Main
 ![Main Page](images/main.png)
 
-Schema design:
+### Schema design
 ![Schema Design](images/schema.png)
